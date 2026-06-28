@@ -1,0 +1,178 @@
+{
+  "0": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.9911,
+      "loss": 1.4738115037918091,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.9912,
+      "loss": 0.45048590726852417,
+      "phase_mean": 0.02888607233762741,
+      "phase_std": 1.8025144338607788,
+      "phase_collapsed": false
+    }
+  },
+  "15": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.9702,
+      "loss": 1.49424751663208,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.9746,
+      "loss": 0.49136080589294434,
+      "phase_mean": 0.053381964564323425,
+      "phase_std": 1.8075422048568726,
+      "phase_collapsed": false
+    }
+  },
+  "30": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.8374,
+      "loss": 1.6028771507263184,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.8648,
+      "loss": 0.7308526279449463,
+      "phase_mean": 0.04516925662755966,
+      "phase_std": 1.8133755922317505,
+      "phase_collapsed": false
+    }
+  },
+  "45": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.5913,
+      "loss": 1.8365851621627807,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.619,
+      "loss": 1.3047885679244995,
+      "phase_mean": 0.04928213357925415,
+      "phase_std": 1.796979546546936,
+      "phase_collapsed": false
+    }
+  },
+  "60": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.35,
+      "loss": 2.087343685913086,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.3591,
+      "loss": 1.9972347152709962,
+      "phase_mean": 0.03265347331762314,
+      "phase_std": 1.7769984006881714,
+      "phase_collapsed": false
+    }
+  },
+  "75": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.2131,
+      "loss": 2.230817227554321,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.2057,
+      "loss": 2.4394091053009035,
+      "phase_mean": 0.005046973470598459,
+      "phase_std": 1.7739229202270508,
+      "phase_collapsed": false
+    }
+  },
+  "90": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.1621,
+      "loss": 2.276190255355835,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.1616,
+      "loss": 2.607194500350952,
+      "phase_mean": -0.006643411237746477,
+      "phase_std": 1.7729943990707397,
+      "phase_collapsed": false
+    }
+  },
+  "random_neg15_15_sample1": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.9827,
+      "loss": 1.482022837638855,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.9821,
+      "loss": 0.4704496467113495,
+      "phase_mean": 0.028069492429494858,
+      "phase_std": 1.8029412031173706,
+      "phase_collapsed": false
+    }
+  },
+  "random_neg30_30_sample1": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.9438,
+      "loss": 1.5157671560287476,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.9482,
+      "loss": 0.5468701726436614,
+      "phase_mean": 0.028507079929113388,
+      "phase_std": 1.8008300065994263,
+      "phase_collapsed": false
+    }
+  },
+  "random_neg45_45_sample1": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.855,
+      "loss": 1.5977771743774414,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.8622,
+      "loss": 0.7467258362770081,
+      "phase_mean": 0.027715791016817093,
+      "phase_std": 1.797951579093933,
+      "phase_collapsed": false
+    }
+  },
+  "random_neg90_90_sample1": {
+    "RealCapsuleLarge": {
+      "accuracy": 0.569,
+      "loss": 1.8798422218322755,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.5698,
+      "loss": 1.5027459896087647,
+      "phase_mean": 0.020126748830080032,
+      "phase_std": 1.7833654880523682,
+      "phase_collapsed": false
+    }
+  }
+}

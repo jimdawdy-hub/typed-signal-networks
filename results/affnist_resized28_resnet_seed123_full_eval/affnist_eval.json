@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "dataset": "AffNIST transformed test set",
+    "source": "https://www.cs.toronto.edu/~tijmen/affNIST/32x/transformed/test.mat.zip",
+    "original_size": 40,
+    "resize": 28,
+    "test_subset": null,
+    "comparison_json": [
+      "results/complex_mnist_affine_aug_mild_resnet_20ep_seed123/complex_capsules_comparison.json"
+    ]
+  },
+  "affnist": {
+    "ResidualCNNBaseline": {
+      "accuracy": 0.93478125,
+      "loss": 0.2208509069442749,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  }
+}

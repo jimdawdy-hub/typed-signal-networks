@@ -1,0 +1,224 @@
+{
+  "0": {
+    "BaselineMLP": {
+      "accuracy": 0.9814,
+      "loss": 0.09119632307812571,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsule": {
+      "accuracy": 0.9883,
+      "loss": 1.4758141777038574,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.9906,
+      "loss": 0.4485432961940765,
+      "phase_mean": -0.0030084014870226383,
+      "phase_std": 1.8027312755584717,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleSpatialB (phase=spatial_angle)": {
+      "accuracy": 0.9913,
+      "loss": 0.4523888957977295,
+      "phase_mean": -0.11620303988456726,
+      "phase_std": 1.8102515935897827,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleA (full complex)": {
+      "accuracy": 0.9892,
+      "loss": 0.4563651210784912,
+      "phase_mean": 0.06757348030805588,
+      "phase_std": 1.787152886390686,
+      "phase_collapsed": false
+    }
+  },
+  "15": {
+    "BaselineMLP": {
+      "accuracy": 0.9428,
+      "loss": 0.3161701418757439,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsule": {
+      "accuracy": 0.9709,
+      "loss": 1.4944351921081542,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.9769,
+      "loss": 0.4854009810447693,
+      "phase_mean": -0.0192362442612648,
+      "phase_std": 1.8108289241790771,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleSpatialB (phase=spatial_angle)": {
+      "accuracy": 0.9742,
+      "loss": 0.5003589259147644,
+      "phase_mean": -0.1367889642715454,
+      "phase_std": 1.7931108474731445,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleA (full complex)": {
+      "accuracy": 0.9744,
+      "loss": 0.4960456325531006,
+      "phase_mean": 0.06040036305785179,
+      "phase_std": 1.7821784019470215,
+      "phase_collapsed": false
+    }
+  },
+  "30": {
+    "BaselineMLP": {
+      "accuracy": 0.7713,
+      "loss": 1.7063143482685088,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsule": {
+      "accuracy": 0.856,
+      "loss": 1.593735638809204,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.8774,
+      "loss": 0.7021583745956421,
+      "phase_mean": -0.007276144810020924,
+      "phase_std": 1.8115721940994263,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleSpatialB (phase=spatial_angle)": {
+      "accuracy": 0.852,
+      "loss": 0.7670955314636231,
+      "phase_mean": -0.10941793024539948,
+      "phase_std": 1.7805272340774536,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleA (full complex)": {
+      "accuracy": 0.8655,
+      "loss": 0.7256262926101684,
+      "phase_mean": 0.041534386575222015,
+      "phase_std": 1.7979475259780884,
+      "phase_collapsed": false
+    }
+  },
+  "45": {
+    "BaselineMLP": {
+      "accuracy": 0.4902,
+      "loss": 5.188181646728515,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsule": {
+      "accuracy": 0.6087,
+      "loss": 1.8133114196777345,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.6238,
+      "loss": 1.266447204017639,
+      "phase_mean": 0.0064078764989972115,
+      "phase_std": 1.8219760656356812,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleSpatialB (phase=spatial_angle)": {
+      "accuracy": 0.5851,
+      "loss": 1.3844912519454957,
+      "phase_mean": -0.09101918339729309,
+      "phase_std": 1.7688630819320679,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleA (full complex)": {
+      "accuracy": 0.6134,
+      "loss": 1.2826902433395386,
+      "phase_mean": 0.057081274688243866,
+      "phase_std": 1.8083415031433105,
+      "phase_collapsed": false
+    }
+  },
+  "60": {
+    "BaselineMLP": {
+      "accuracy": 0.2744,
+      "loss": 9.985441343688965,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsule": {
+      "accuracy": 0.3501,
+      "loss": 2.0705626220703124,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.3718,
+      "loss": 1.9609034702301025,
+      "phase_mean": 0.003273905022069812,
+      "phase_std": 1.8405638933181763,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleSpatialB (phase=spatial_angle)": {
+      "accuracy": 0.3342,
+      "loss": 2.0637027614593504,
+      "phase_mean": -0.09560414403676987,
+      "phase_std": 1.7686177492141724,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleA (full complex)": {
+      "accuracy": 0.3638,
+      "loss": 1.9353981937408447,
+      "phase_mean": 0.045349713414907455,
+      "phase_std": 1.8013582229614258,
+      "phase_collapsed": false
+    }
+  },
+  "90": {
+    "BaselineMLP": {
+      "accuracy": 0.1205,
+      "loss": 17.414030963134767,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsule": {
+      "accuracy": 0.1829,
+      "loss": 2.2713200328826906,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.183,
+      "loss": 2.603661245727539,
+      "phase_mean": -0.003285221755504608,
+      "phase_std": 1.8559532165527344,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleSpatialB (phase=spatial_angle)": {
+      "accuracy": 0.153,
+      "loss": 2.6709688186645506,
+      "phase_mean": -0.09796416014432907,
+      "phase_std": 1.7763874530792236,
+      "phase_collapsed": false
+    },
+    "ComplexCapsuleA (full complex)": {
+      "accuracy": 0.1594,
+      "loss": 2.5589089363098143,
+      "phase_mean": 0.010110356844961643,
+      "phase_std": 1.7992018461227417,
+      "phase_collapsed": false
+    }
+  }
+}

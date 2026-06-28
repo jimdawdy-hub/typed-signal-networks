@@ -1,0 +1,91 @@
+{
+  "config": {
+    "vocab_size": 50257,
+    "seq_len": 128,
+    "d_model": 192,
+    "n_heads": 6,
+    "n_layers": 4,
+    "dropout": 0.1
+  },
+  "params": 11453760,
+  "token_path": "results/fineweb_edu_1b_tokens_250k/tokens.npy",
+  "args": {
+    "command": "train",
+    "token_path": "results/fineweb_edu_1b_tokens_250k/tokens.npy",
+    "output_dir": "results/fineweb_edu_1b_tiny_transformer_smoke",
+    "device": "auto",
+    "gpu_index": 0,
+    "seed": 123,
+    "steps": 100,
+    "batch_size": 32,
+    "seq_len": 128,
+    "d_model": 192,
+    "n_heads": 6,
+    "n_layers": 4,
+    "dropout": 0.1,
+    "lr": 0.0003,
+    "weight_decay": 0.1,
+    "grad_clip": 1.0,
+    "amp": true,
+    "log_every": 20,
+    "eval_batches": 8
+  },
+  "history": [
+    {
+      "step": 1,
+      "train_loss": 10.850297927856445,
+      "eval_loss": 10.634162306785583,
+      "eval_perplexity": 41529.624992470504,
+      "eval_token_accuracy": 0.039398193359375,
+      "seconds": 1.198230504989624
+    },
+    {
+      "step": 20,
+      "train_loss": 9.505050659179688,
+      "eval_loss": 9.428195357322693,
+      "eval_perplexity": 12434.067423465862,
+      "eval_token_accuracy": 0.037017822265625,
+      "seconds": 2.145637273788452
+    },
+    {
+      "step": 40,
+      "train_loss": 8.519323348999023,
+      "eval_loss": 8.447505235671997,
+      "eval_perplexity": 4663.424067203125,
+      "eval_token_accuracy": 0.039215087890625,
+      "seconds": 3.123293399810791
+    },
+    {
+      "step": 60,
+      "train_loss": 7.923495292663574,
+      "eval_loss": 7.818510353565216,
+      "eval_perplexity": 2486.199090567104,
+      "eval_token_accuracy": 0.040924072265625,
+      "seconds": 4.1144468784332275
+    },
+    {
+      "step": 80,
+      "train_loss": 7.525054931640625,
+      "eval_loss": 7.5410966873168945,
+      "eval_perplexity": 1883.8949363578367,
+      "eval_token_accuracy": 0.07159423828125,
+      "seconds": 5.0825300216674805
+    },
+    {
+      "step": 100,
+      "train_loss": 7.442878246307373,
+      "eval_loss": 7.483836770057678,
+      "eval_perplexity": 1779.0535173800502,
+      "eval_token_accuracy": 0.0750732421875,
+      "seconds": 6.060023784637451
+    }
+  ],
+  "final": {
+    "step": 100,
+    "train_loss": 7.442878246307373,
+    "eval_loss": 7.483836770057678,
+    "eval_perplexity": 1779.0535173800502,
+    "eval_token_accuracy": 0.0750732421875,
+    "seconds": 6.060023784637451
+  }
+}

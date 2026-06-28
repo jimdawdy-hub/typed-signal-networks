@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-unity"
+version = "0.1.0"
+description = "GPU research harness for ternary MoE and complex capsule experiments."
+requires-python = ">=3.12"
+dependencies = [
+  "torch>=2.10",
+  "torchvision>=0.25",
+  "numpy>=2.0",
+  "pandas>=3.0",
+  "scikit-learn>=1.7",
+  "scipy>=1.14",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "matplotlib>=3.9", "tensorboard>=2.18"]
+text = ["datasets>=4.0", "transformers>=5.0", "tokenizers>=0.22", "tiktoken>=0.12"]
+
+[tool.setuptools.packages.find]
+include = ["ai_unity*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

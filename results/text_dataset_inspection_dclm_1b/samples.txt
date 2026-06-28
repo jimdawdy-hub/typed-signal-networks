@@ -1,0 +1,86 @@
+--- sample 0 len=2481 ---
+Take the 2-minute tour ×
+
+When I used the exe file to install it it works on first start. Then when I restart it and boot from it, I get a purple screen then it flashes to the login screen what happend to the ubuntu logo?
+
+share|improve this question
+add comment
+
+1 Answer
+
+to put it simply, the graphic driver loads slower than the rest of the system. I fixed it with these directions.
+
+Get your precious Plymouth splash screen back
+
+I didn't not follow the directions from this particular website, I couldn't find the one I used but these are the correct direction. I have mine back and can now remove the "quiet splash" and see the boot messages if needed.
+
+Edit: while there is an detailed explanation of why you might want to check out, I and going to copy and paste the instructions below in case the link expires.
+
+Open a virtual terminal and type the following command:
+
+sudo gedit /etc/initramfs-tools/conf.d/splash
+
+This file may not exist, so you may be creating it from scratch now.
+
+Enter the following content on the file you opened on the previous step:
+
+
+Close and save the file.
+
+Now, run the following command to commit the change:
+
+sudo update-initramfs -u
+
+Reboot and enjoy your Plymouth splash screen.
+
+share|improve this answer
+So i will need my gpu because mine isent working atm –  winter4w Jun 13 '12 at 2:50
+I'm not sure what you are asking here. The fix has nothing to do with which gpu you have. If you can get to the log in screen your gpu is working. The reason that you have no splash screen is that the new kernels load so fast that the DRIVERS load after the rest of the system. This fix will get the system to wait for the graphic driver to load, hence allowing you to see the boot screen or any boot messages if you Esc. the splash screen. The system will boot slightly slower with this fix but if you have a fairly new system you will not notice the difference. –  TrailRider Jun 13 '12 at 21:39
+Unless I misunderstood your initial question. after you installed yo
+
+--- sample 1 len=1606 ---
+The first rule of Fruit Fly Fight Club: Flies can't talk about Fruit Fly Fight Club. Because they can't talk at all. At least not to humans.
+
+Researchers at Harvard Medical School took a break from studying lobster fighting and shifted their focus to fruit fly fights, and even mutant fruit fly fights.
+
+(Via The Annals of Improbable Research.)
+
+Fruit flies are strange creatures. Or perhaps it's that fruit fly researchers are strange creatures.
+
+One of my cousins was a fruit fly researcher. She took fruit fly testicles and squashed them and then studied them under a microscope, looking for... something... I forget. I think just finding the fruit fly testicles in the first place was accomplishment enough.
+
+Fruit fly researchers like to give their discoveries strange names. Typically, a gene is named after what results when you disable it. For example, a gene without which fruit flies die in two days is named Kenny, after the South Park character.
+
+My favorite: The gene without which fruit flies get drunk really easily is called cheap date. (That last page has several more funny gene names.)
+
+Yes, that's right. Fruit flies get drunk. There's a fruit fly drunk-o-meter, though I forget how it works. But one amusing aspect of fruit fly drunkenness is that just before they finally pass out, there's a big burst of activity.
+
+Strange gene naming has spread beyond the fruit fly world. There is a human gene named sonic hedgehog after the Sega video game character. (It's related to the fruit fly gene "hedgehog", so named because disabling it causes the fly to develop into a ball with spikes.)
+
+--- sample 2 len=2287 ---
+Well the answer is easy ..... No!? Or is it..... This is really a two fold statement.
+
+We do not have a sequencer for NT 4.0. So basically you cannot sequence your application from NT 4.0 directly and put them straight into your Windows XP SoftGrid environment!
+
+
+So if that's the case, how do I get my application from NT 4.0 to Sequenced Virtual Application and then deployed? Well, I hate to say it but there is no easy route! The main thing to understand is getting a process behind you to bring your application up to a specific level and then sequenced on a supportable platform such as Windows XP.
+
+Application Compatability 
+
+Application Migration Process from NT 4.0 (High Level)
+
+The above show this process around taking an old NT 4.0 application and passing it through the application compatibility toolkit. Now I am not saying this is the be all and end all but it certainly can be used as a good guide, or flow process you can leverage off!
+
+The Application Compatibility Toolkit (ACT) enables software developers, independent software vendors (ISVs), and IT professionals who work in a corporate environment to determine, before rolling out within the organization, whether their applications are compatible with a new version of the Microsoft® Windows® operating system. ACT also enables such individuals to determine how an update to the new version will impact their applications.
+You can use the ACT features to:
+
+
+You can download it from here: http://www.microsoft.com/downloads/details.aspx?familyid=24DA89E9-B581-47B0-B45E-492DD6DA2971&displaylang=en 
+
+Once your application is to a stable state you can look to run through the sequencing wizards as per normal and capture your application.
+
+
+The core benefit is that you are just trying to get this one suite of applications working! Not regression testing it against many others 1,2,4,8,16,32,64, etc etc application along side it.
+
+This can help save you and your business valuable time and stop massive amounts of pain with
+

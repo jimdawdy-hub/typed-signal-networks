@@ -1,0 +1,34 @@
+{
+  "requested_dataset": "dclm-baseline-1b",
+  "resolved_dataset": "codelion/dclm-baseline-1B",
+  "split": "train",
+  "text_column": "text",
+  "sample_count": 3,
+  "samples": [
+    {
+      "row_index": 0,
+      "text_length": 2481,
+      "keys": [
+        "text"
+      ],
+      "preview": "Take the 2-minute tour \u00d7\\n\\nWhen I used the exe file to install it it works on first start. Then when I restart it and boot from it, I get a purple screen then it flashes to the login screen what happend to the ubuntu logo?\\n\\nshare|improve this question\\nadd comment\\n\\n1 Answer\\n\\nto put it simply, the graphic driver loads slower than the rest of the system. I fixed it with these directions.\\n\\nGet your precious Plymouth splash screen back\\n\\nI didn't not follow the directions from this particular website, "
+    },
+    {
+      "row_index": 1,
+      "text_length": 1606,
+      "keys": [
+        "text"
+      ],
+      "preview": "The first rule of Fruit Fly Fight Club: Flies can't talk about Fruit Fly Fight Club. Because they can't talk at all. At least not to humans.\\n\\nResearchers at Harvard Medical School took a break from studying lobster fighting and shifted their focus to fruit fly fights, and even mutant fruit fly fights.\\n\\n(Via The Annals of Improbable Research.)\\n\\nFruit flies are strange creatures. Or perhaps it's that fruit fly researchers are strange creatures.\\n\\nOne of my cousins was a fruit fly researcher. She to"
+    },
+    {
+      "row_index": 2,
+      "text_length": 2287,
+      "keys": [
+        "text"
+      ],
+      "preview": "Well the answer is easy ..... No!? Or is it..... This is really a two fold statement.\\n\\nWe do not have a sequencer for NT 4.0. So basically you cannot sequence your application from NT 4.0 directly and put them straight into your Windows XP SoftGrid environment!\\n\\n\\nSo if that's the case, how do I get my application from NT 4.0 to Sequenced Virtual Application and then\u00a0deployed? Well, I hate to say it but there is no easy route! The main thing to understand is getting a process behind you to bring "
+    }
+  ],
+  "samples_text_file": "results/text_dataset_inspection_dclm_1b/samples.txt"
+}

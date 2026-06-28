@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "dataset": "AffNIST transformed test set",
+    "source": "https://www.cs.toronto.edu/~tijmen/affNIST/32x/transformed/test.mat.zip",
+    "original_size": 40,
+    "resize": 28,
+    "test_subset": 256,
+    "comparison_json": [
+      "results/complex_mnist_affine_aug_mild_vit_20ep_seed123/complex_capsules_comparison.json"
+    ]
+  },
+  "affnist": {
+    "VisionTransformerBaseline": {
+      "accuracy": 0.140625,
+      "loss": 5.6833391189575195,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  }
+}

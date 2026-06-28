@@ -1,0 +1,216 @@
+{
+  "config": {
+    "vocab_size": 50257,
+    "seq_len": 128,
+    "d_model": 192,
+    "n_heads": 6,
+    "n_layers": 4,
+    "dropout": 0.1,
+    "model_kind": "moe",
+    "num_experts": 4,
+    "top_k": 2
+  },
+  "params": 15007312,
+  "token_path": "results/fineweb_edu_1b_tokens_5m/tokens.npy",
+  "args": {
+    "command": "train",
+    "token_path": "results/fineweb_edu_1b_tokens_5m/tokens.npy",
+    "output_dir": "results/fineweb_edu_1b_tiny_moe_5m_500s",
+    "device": "auto",
+    "gpu_index": 0,
+    "seed": 123,
+    "steps": 500,
+    "batch_size": 32,
+    "seq_len": 128,
+    "d_model": 192,
+    "n_heads": 6,
+    "n_layers": 4,
+    "dropout": 0.1,
+    "model_kind": "moe",
+    "num_experts": 4,
+    "top_k": 2,
+    "lb_weight": 0.01,
+    "lr": 0.0003,
+    "weight_decay": 0.1,
+    "grad_clip": 1.0,
+    "amp": true,
+    "log_every": 50,
+    "eval_batches": 16
+  },
+  "history": [
+    {
+      "step": 1,
+      "train_loss": 10.835577964782715,
+      "train_main_loss": 10.8355712890625,
+      "train_aux_loss": 0.000696290866471827,
+      "eval_loss": 10.66939514875412,
+      "eval_aux_loss": 0.0014227580759325065,
+      "eval_perplexity": 43018.91358373007,
+      "eval_token_accuracy": 0.0011749267578125,
+      "seconds": 1.2961139678955078
+    },
+    {
+      "step": 50,
+      "train_loss": 8.355257034301758,
+      "train_main_loss": 8.355246543884277,
+      "train_aux_loss": 0.0010255291126668453,
+      "eval_loss": 8.281412661075592,
+      "eval_aux_loss": 0.001027113241434563,
+      "eval_perplexity": 3949.770129251615,
+      "eval_token_accuracy": 0.039459228515625,
+      "seconds": 5.101773738861084
+    },
+    {
+      "step": 100,
+      "train_loss": 7.499973297119141,
+      "train_main_loss": 7.499942779541016,
+      "train_aux_loss": 0.0030578384175896645,
+      "eval_loss": 7.606201469898224,
+      "eval_aux_loss": 0.0027784086269093677,
+      "eval_perplexity": 2010.626149886685,
+      "eval_token_accuracy": 0.0764312744140625,
+      "seconds": 8.980098247528076
+    },
+    {
+      "step": 150,
+      "train_loss": 7.463686466217041,
+      "train_main_loss": 7.463640213012695,
+      "train_aux_loss": 0.004623532760888338,
+      "eval_loss": 7.425394803285599,
+      "eval_aux_loss": 0.004660880920710042,
+      "eval_perplexity": 1678.0619466250862,
+      "eval_token_accuracy": 0.0922393798828125,
+      "seconds": 12.909789085388184
+    },
+    {
+      "step": 200,
+      "train_loss": 7.080872535705566,
+      "train_main_loss": 7.080832481384277,
+      "train_aux_loss": 0.004027312621474266,
+      "eval_loss": 7.269525200128555,
+      "eval_aux_loss": 0.0034374158858554438,
+      "eval_perplexity": 1435.868540964869,
+      "eval_token_accuracy": 0.100921630859375,
+      "seconds": 16.839109659194946
+    },
+    {
+      "step": 250,
+      "train_loss": 7.121213912963867,
+      "train_main_loss": 7.121181488037109,
+      "train_aux_loss": 0.0032203353475779295,
+      "eval_loss": 7.071423232555389,
+      "eval_aux_loss": 0.003962611401220784,
+      "eval_perplexity": 1177.8231581841735,
+      "eval_token_accuracy": 0.112762451171875,
+      "seconds": 20.79115319252014
+    },
+    {
+      "step": 300,
+      "train_loss": 7.06347131729126,
+      "train_main_loss": 7.063443660736084,
+      "train_aux_loss": 0.002773748245090246,
+      "eval_loss": 6.949191093444824,
+      "eval_aux_loss": 0.0032435915345558897,
+      "eval_perplexity": 1042.3062587171294,
+      "eval_token_accuracy": 0.1182403564453125,
+      "seconds": 24.692924976348877
+    },
+    {
+      "step": 350,
+      "train_loss": 6.926875591278076,
+      "train_main_loss": 6.926842212677002,
+      "train_aux_loss": 0.0033310921862721443,
+      "eval_loss": 6.863223701715469,
+      "eval_aux_loss": 0.003386436539585702,
+      "eval_perplexity": 956.4453976853928,
+      "eval_token_accuracy": 0.120635986328125,
+      "seconds": 28.634589672088623
+    },
+    {
+      "step": 400,
+      "train_loss": 6.837517738342285,
+      "train_main_loss": 6.837493896484375,
+      "train_aux_loss": 0.0023611215874552727,
+      "eval_loss": 6.7824631333351135,
+      "eval_aux_loss": 0.0031292434432543814,
+      "eval_perplexity": 882.2391226124754,
+      "eval_token_accuracy": 0.12908935546875,
+      "seconds": 32.62487769126892
+    },
+    {
+      "step": 450,
+      "train_loss": 6.556007385253906,
+      "train_main_loss": 6.555974960327148,
+      "train_aux_loss": 0.003240709425881505,
+      "eval_loss": 6.708769917488098,
+      "eval_aux_loss": 0.002896057951147668,
+      "eval_perplexity": 819.561890406734,
+      "eval_token_accuracy": 0.134063720703125,
+      "seconds": 36.58640003204346
+    },
+    {
+      "step": 500,
+      "train_loss": 6.660050392150879,
+      "train_main_loss": 6.660024166107178,
+      "train_aux_loss": 0.0026206932961940765,
+      "eval_loss": 6.668835878372192,
+      "eval_aux_loss": 0.002515317901270464,
+      "eval_perplexity": 787.478350089623,
+      "eval_token_accuracy": 0.1327667236328125,
+      "seconds": 40.55236005783081
+    }
+  ],
+  "final": {
+    "step": 500,
+    "train_loss": 6.660050392150879,
+    "train_main_loss": 6.660024166107178,
+    "train_aux_loss": 0.0026206932961940765,
+    "eval_loss": 6.668835878372192,
+    "eval_aux_loss": 0.002515317901270464,
+    "eval_perplexity": 787.478350089623,
+    "eval_token_accuracy": 0.1327667236328125,
+    "seconds": 40.55236005783081
+  },
+  "routing": [
+    {
+      "usage_fraction": [
+        0.2313232421875,
+        0.2874755859375,
+        0.2413330078125,
+        0.2398681640625
+      ],
+      "entropy": 0.8916627168655396,
+      "collapse_rate": 0.2874755859375
+    },
+    {
+      "usage_fraction": [
+        0.1834716796875,
+        0.3302001953125,
+        0.2645263671875,
+        0.2218017578125
+      ],
+      "entropy": 1.031679391860962,
+      "collapse_rate": 0.3302001953125
+    },
+    {
+      "usage_fraction": [
+        0.266845703125,
+        0.383544921875,
+        0.159912109375,
+        0.189697265625
+      ],
+      "entropy": 1.1399662494659424,
+      "collapse_rate": 0.383544921875
+    },
+    {
+      "usage_fraction": [
+        0.1939697265625,
+        0.3070068359375,
+        0.2398681640625,
+        0.2591552734375
+      ],
+      "entropy": 1.2416729927062988,
+      "collapse_rate": 0.3070068359375
+    }
+  ]
+}

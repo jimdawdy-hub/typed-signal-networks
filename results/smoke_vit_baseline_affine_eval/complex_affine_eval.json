@@ -1,0 +1,20 @@
+{
+  "clean": {
+    "VisionTransformerBaseline": {
+      "accuracy": 0.1328125,
+      "loss": 2.357246160507202,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_left_zoom_sample1": {
+    "VisionTransformerBaseline": {
+      "accuracy": 0.1328125,
+      "loss": 2.3576650619506836,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  }
+}

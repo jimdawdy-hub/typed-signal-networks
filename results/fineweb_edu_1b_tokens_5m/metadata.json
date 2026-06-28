@@ -1,0 +1,12 @@
+{
+  "dataset": "fineweb-edu-1b",
+  "resolved_dataset": "codelion/fineweb-edu-1B",
+  "split": "train",
+  "text_column": "text",
+  "encoding": "gpt2",
+  "docs": 4539,
+  "chars": 22878553,
+  "tokens": 5000000,
+  "token_path": "results/fineweb_edu_1b_tokens_5m/tokens.npy",
+  "seconds": 14.082477807998657
+}

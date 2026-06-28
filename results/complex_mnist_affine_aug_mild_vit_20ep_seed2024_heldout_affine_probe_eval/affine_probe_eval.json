@@ -1,0 +1,90 @@
+{
+  "heldout_affine_left_zoom": {
+    "VisionTransformerBaseline": {
+      "examples": 4000,
+      "train_examples": 2000,
+      "test_examples": 2000,
+      "feature_blocks": {
+        "vit_cls": {
+          "dims": 192,
+          "factors": {
+            "angle_degrees": {
+              "r2": 0.2665606141090393,
+              "mae": 6.190844535827637,
+              "target_std": 8.73707389831543
+            },
+            "translate_x_frac": {
+              "r2": 0.9071646928787231,
+              "mae": 0.03430597484111786,
+              "target_std": 0.14425647258758545
+            },
+            "translate_y_frac": {
+              "r2": 0.968559741973877,
+              "mae": 0.020502757281064987,
+              "target_std": 0.1465045064687729
+            },
+            "scale": {
+              "r2": 0.09424066543579102,
+              "mae": 0.03420858457684517,
+              "target_std": 0.043108612298965454
+            },
+            "shear_x_degrees": {
+              "r2": 0.007843613624572754,
+              "mae": 3.693575143814087,
+              "target_std": 4.372110366821289
+            },
+            "shear_y_degrees": {
+              "r2": -0.024617671966552734,
+              "mae": 3.684359550476074,
+              "target_std": 4.293907165527344
+            }
+          }
+        }
+      }
+    }
+  },
+  "heldout_affine_right_zoom": {
+    "VisionTransformerBaseline": {
+      "examples": 4000,
+      "train_examples": 2000,
+      "test_examples": 2000,
+      "feature_blocks": {
+        "vit_cls": {
+          "dims": 192,
+          "factors": {
+            "angle_degrees": {
+              "r2": 0.39507561922073364,
+              "mae": 5.495112419128418,
+              "target_std": 8.67241096496582
+            },
+            "translate_x_frac": {
+              "r2": 0.6765073537826538,
+              "mae": 0.063791923224926,
+              "target_std": 0.14299198985099792
+            },
+            "translate_y_frac": {
+              "r2": 0.9435837268829346,
+              "mae": 0.026971613988280296,
+              "target_std": 0.1445082724094391
+            },
+            "scale": {
+              "r2": 0.026862144470214844,
+              "mae": 0.04783371835947037,
+              "target_std": 0.05732099711894989
+            },
+            "shear_x_degrees": {
+              "r2": 0.035594642162323,
+              "mae": 3.5882375240325928,
+              "target_std": 4.319028377532959
+            },
+            "shear_y_degrees": {
+              "r2": -0.012306571006774902,
+              "mae": 3.63297176361084,
+              "target_std": 4.259219646453857
+            }
+          }
+        }
+      }
+    }
+  }
+}

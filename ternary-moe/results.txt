@@ -1,0 +1,32 @@
+Ternary + MoE: MNIST Comparison Results
+==================================================
+
+FloatSingle (baseline)
+  Parameters: 269,322
+  Train accuracy: 98.60%
+  Test accuracy: 97.79%
+  Training time: 91.2s
+
+FloatMoE (4 experts, top-1)
+  Parameters: 410,220
+  Train accuracy: 96.32%
+  Test accuracy: 95.66%
+  Training time: 116.2s
+
+TernarySingle
+  Parameters: 269,322
+  Train accuracy: 94.49%
+  Test accuracy: 93.40%
+  Training time: 114.5s
+
+TernaryMoE (4 experts, top-1)
+  Parameters: 410,220
+  Train accuracy: 89.58%
+  Test accuracy: 89.61%
+  Training time: 140.2s
+
+
+Key finding:
+  Ternary gap: +4.39%
+  MoE helped: -3.79%
+  Remaining gap: +8.18%

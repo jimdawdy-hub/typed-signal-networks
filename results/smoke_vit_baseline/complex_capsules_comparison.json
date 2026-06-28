@@ -1,0 +1,149 @@
+{
+  "VisionTransformerBaseline": {
+    "params": 2767663,
+    "history": [
+      {
+        "epoch": 1,
+        "train_acc": 0.0,
+        "test_acc": 0.0,
+        "train_loss": 2.48779296875,
+        "test_loss": 2.447474956512451,
+        "aux_loss": 0.0,
+        "time": 0.7522187232971191
+      }
+    ],
+    "final_train_acc": 0.0,
+    "final_test_acc": 0.0,
+    "final_test_loss": 2.447474956512451,
+    "total_time": 0.9487168788909912,
+    "checkpoint": "checkpoints/smoke_vit_baseline/complex_capsules_VisionTransformerBaseline_seed101.pt",
+    "latest_checkpoint": "checkpoints/smoke_vit_baseline/complex_capsules_VisionTransformerBaseline_seed101_latest.pt",
+    "best_checkpoint": "checkpoints/smoke_vit_baseline/complex_capsules_VisionTransformerBaseline_seed101_best.pt",
+    "best_test_acc": 0.0,
+    "best_epoch": 1,
+    "routing": null,
+    "phase_analysis": null,
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "requested_dataset": "fineweb-edu-1b",
+  "resolved_dataset": "codelion/fineweb-edu-1B",
+  "split": "train",
+  "text_column": "text",
+  "sample_count": 3,
+  "samples": [
+    {
+      "row_index": 0,
+      "text_length": 920,
+      "keys": [
+        "text"
+      ],
+      "preview": "Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.\\n2012 June 23\\nExplanation: As seen from Fr\u00f6s\u00f6n island in northern Sweden the Sun did set a day after the summer solstice. From that location below the arctic circle it settled slowly behind the northern horizon. During the sunset's final minute, this remarkable sequence of 7 images follows the distorted edge of the solar disk a"
+    },
+    {
+      "row_index": 1,
+      "text_length": 949,
+      "keys": [
+        "text"
+      ],
+      "preview": "ASL Literature and Art\\nThis section is a collection of ASL storytelling, poetry, works of art, and other creative works. It also consists of posts on literary aspects of ASL.\\nSpeech language can convey sound effects in storytelling, whereas sign language can convey cinematic effects in storytelling.\\nPoetry in sign language has its own poetic features such as rhymes, rhythms, meters, and other features that charactierize poetry which is not limited to speech.\\nExplore ASL literary arts in this sec"
+    },
+    {
+      "row_index": 2,
+      "text_length": 4359,
+      "keys": [
+        "text"
+      ],
+      "preview": "May 19, 2008 A vaccine created by University of Rochester Medical Center scientists prevents the development of Alzheimer's disease-like pathology in mice without causing inflammation or significant side effects.\\nVaccinated mice generated an immune response to the protein known as amyloid-beta peptide, which accumulates in what are called \"amyloid plaques\" in brains of people with Alzheimer's. The vaccinated mice demonstrated normal learning skills and functioning memory in spite of being geneti"
+    }
+  ],
+  "samples_text_file": "results/text_dataset_inspection_fineweb_edu_1b/samples.txt"
+}

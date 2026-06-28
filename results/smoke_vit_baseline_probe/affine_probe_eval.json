@@ -1,0 +1,46 @@
+{
+  "heldout_affine_left_zoom": {
+    "VisionTransformerBaseline": {
+      "examples": 32,
+      "train_examples": 16,
+      "test_examples": 16,
+      "feature_blocks": {
+        "vit_cls": {
+          "dims": 192,
+          "factors": {
+            "angle_degrees": {
+              "r2": -1.3045997619628906,
+              "mae": 11.879355430603027,
+              "target_std": 9.507035255432129
+            },
+            "translate_x_frac": {
+              "r2": -0.011547088623046875,
+              "mae": 0.12314686924219131,
+              "target_std": 0.14188624918460846
+            },
+            "translate_y_frac": {
+              "r2": -0.42486119270324707,
+              "mae": 0.15238220989704132,
+              "target_std": 0.14500489830970764
+            },
+            "scale": {
+              "r2": -2.003884792327881,
+              "mae": 0.0620514377951622,
+              "target_std": 0.04323876276612282
+            },
+            "shear_x_degrees": {
+              "r2": -0.7258791923522949,
+              "mae": 5.081271648406982,
+              "target_std": 4.407142639160156
+            },
+            "shear_y_degrees": {
+              "r2": -0.9348485469818115,
+              "mae": 4.335934638977051,
+              "target_std": 3.981222152709961
+            }
+          }
+        }
+      }
+    }
+  }
+}

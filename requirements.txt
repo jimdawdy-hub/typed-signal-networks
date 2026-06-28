@@ -1,0 +1,9 @@
+torch>=2.10
+torchvision>=0.25
+pytest>=8.0
+numpy>=2.0
+pandas>=3.0
+scikit-learn>=1.7
+scipy>=1.14
+matplotlib>=3.9
+tensorboard>=2.18

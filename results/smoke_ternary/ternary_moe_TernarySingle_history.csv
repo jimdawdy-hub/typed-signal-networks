@@ -1,0 +1,2 @@
+aux_loss,epoch,test_acc,test_loss,time,train_acc,train_loss
+0.0,1,0.25,447.1572570800781,0.01840829849243164,0.25,2.208775043487549

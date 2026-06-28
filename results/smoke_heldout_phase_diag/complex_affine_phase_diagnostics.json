@@ -1,0 +1,47 @@
+{
+  "heldout_affine_left_zoom_sample1": {
+    "ComplexCapsuleB (phase=angle)": {
+      "examples": 256,
+      "phase_dims": 8,
+      "phase_std": 1.632339596748352,
+      "factor_correlations": {
+        "angle_degrees": {
+          "best_feature": "sin_dim_6",
+          "best_corr": 0.2511010766029358,
+          "best_abs_corr": 0.2511010766029358,
+          "mean_abs_corr": 0.07661588490009308
+        },
+        "translate_x_frac": {
+          "best_feature": "sin_dim_2",
+          "best_corr": 0.13826513290405273,
+          "best_abs_corr": 0.13826513290405273,
+          "mean_abs_corr": 0.05349700525403023
+        },
+        "translate_y_frac": {
+          "best_feature": "sin_dim_6",
+          "best_corr": 0.1434333175420761,
+          "best_abs_corr": 0.1434333175420761,
+          "mean_abs_corr": 0.06090196222066879
+        },
+        "scale": {
+          "best_feature": "sin_dim_2",
+          "best_corr": 0.12252330034971237,
+          "best_abs_corr": 0.12252330034971237,
+          "mean_abs_corr": 0.05893389880657196
+        },
+        "shear_x_degrees": {
+          "best_feature": "sin_dim_6",
+          "best_corr": 0.13109980523586273,
+          "best_abs_corr": 0.13109980523586273,
+          "mean_abs_corr": 0.044440798461437225
+        },
+        "shear_y_degrees": {
+          "best_feature": "sin_dim_4",
+          "best_corr": 0.12384988367557526,
+          "best_abs_corr": 0.12384988367557526,
+          "mean_abs_corr": 0.05254298448562622
+        }
+      }
+    }
+  }
+}

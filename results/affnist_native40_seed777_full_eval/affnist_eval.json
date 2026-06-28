@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "dataset": "AffNIST transformed test set",
+    "source": "https://www.cs.toronto.edu/~tijmen/affNIST/32x/transformed/test.mat.zip",
+    "original_size": 40,
+    "resize": 40,
+    "test_subset": null,
+    "comparison_json": [
+      "results/complex_mnist_affine_aug_mild_cnn_20ep_seed777/complex_capsules_comparison.json",
+      "results/complex_mnist_affine_aug_mild_vit_20ep_seed777/complex_capsules_comparison.json"
+    ]
+  },
+  "affnist": {
+    "BaselineCNN": {
+      "accuracy": 0.7481,
+      "loss": 0.9979561203956604,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleLarge": {
+      "accuracy": 0.52149375,
+      "loss": 1.9243758234024049,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "ComplexCapsuleB (phase=angle)": {
+      "accuracy": 0.357359375,
+      "loss": 1.9072923734664917,
+      "phase_mean": 0.023499177768826485,
+      "phase_std": 1.7710376977920532,
+      "phase_collapsed": false
+    },
+    "VisionTransformerBaseline": {
+      "accuracy": 0.69443125,
+      "loss": 1.2810132461547852,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  }
+}
