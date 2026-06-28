@@ -1,19 +1,10 @@
-# AI Unity
+# Typed Signal Networks
 
-AI Unity started from a simple but specific question: can a neural signal carry more than just magnitude?
+Typed Signal Networks is a small research codebase built around a simple question: can a neural signal carry more than magnitude?
 
-In ordinary neural nets, a value is mostly just a number. The idea behind this project was to ask whether the signal itself could carry an additional meaningful state, like identity, phase, or type, so that the next layer could treat
-the same value differently depending on what kind of signal it was. That line of thinking led to capsule networks, complex-valued activations, and routing mechanisms that try to preserve more structure than a standard scalar pipeline.
+The idea behind the project was to ask whether a signal could also carry identity, phase, or type, so the next layer would treat the same value differently depending on what kind of signal it was. That line of thinking led to capsule networks, complex-valued activations, and routing mechanisms that preserve more structure than a standard scalar pipeline.
 
-This repository tests that idea in a controlled way. The core experiments compare learned-phase complex capsules against real-valued capsule controls, parameter-matched CNN and ViT baselines, and a stronger residual CNN baseline on
-synthetic affine MNIST and AffNIST. The result is nuanced: learned phase does help within the capsule family, but stronger conventional models do better overall, and the broad robustness claim does not hold up. That makes the project
-less a victory lap and more a clean diagnostic study of what learned phase can and cannot do.
-
-The work started with trying to determine if learned phase in a capsule network actually make a vision model more robust to geometric change?
-
-The short answer from these experiments is: a little, but not enough.
-
-`ComplexCapsuleB`, the learned-phase capsule model, does beat an exactly parameter-matched real capsule control on some synthetic affine tests. That is the useful signal in this repo. But stronger conventional baselines beat it, and an independent AffNIST evaluation reverses even the capsule-family advantage. So this repository is mainly a controlled negative result, not a claim of state-of-the-art robustness.
+The repository tests that idea in a controlled way. The core experiments compare learned-phase complex capsules against real-valued capsule controls, parameter-matched CNN and ViT baselines, and a stronger residual CNN baseline on synthetic affine MNIST and AffNIST. The result is nuanced: learned phase helps within the capsule family, but stronger conventional models do better overall, and the broad robustness claim does not hold up. That makes the project a diagnostic study of what learned phase can and cannot do.
 
 ## What’s Here
 
@@ -37,6 +28,19 @@ At a high level:
 5. Learned phase still seems to encode some affine information, but not enough to beat stronger models.
 
 If you want the detailed numbers, start with [FINDINGS_SUMMARY.md](FINDINGS_SUMMARY.md) and then read the latest notebook section in [UNITY_NOTEBOOK.md](UNITY_NOTEBOOK.md).
+
+## Foundations
+
+This project is built on ideas that came from earlier work:
+
+- Capsules and routing by agreement: Hinton et al. on transforming auto-encoders, then Sabour, Frosst, and Hinton on dynamic routing, and Hinton et al. on matrix capsules.
+- Mixture of experts: Jacobs, Jordan, Nowlan, and Hinton on adaptive mixtures of local experts, then Shazeer et al. on sparsely-gated MoE.
+- Ternary weights: Li et al. on ternary weight networks.
+- Complex-valued networks: Trabelsi et al. on deep complex networks.
+- Residual networks: He et al. on deep residual learning.
+- Vision Transformers: Dosovitskiy et al. on ViT.
+
+Those ideas are cited in the paper draft and are the intellectual backdrop for the experiments here.
 
 ## Repo Layout
 

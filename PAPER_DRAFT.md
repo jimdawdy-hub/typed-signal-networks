@@ -1,4 +1,4 @@
-# When Learned Phase Is Not Enough: A Diagnostic Evaluation of Complex Capsules for Affine Robustness
+# When Learned Phase Is Not Enough: A Diagnostic Evaluation of Typed Neural Signals for Affine Robustness
 
 First draft. Working paper, 2026-06-28.
 
@@ -39,7 +39,17 @@ This paper separates three claims that are easy to conflate:
 
 The experiments support the first claim on synthetic affine data, partially support the third claim, and reject the second claim.
 
-TODO: Add formal related-work citations for dynamic routing capsules, matrix capsules, complex-valued neural networks, AffNIST, ResNets, and Vision Transformers.
+Relevant prior work:
+
+- Hinton, Krizhevsky, and Wang, "Transforming Auto-Encoders", 2011.
+- Sabour, Frosst, and Hinton, "Dynamic Routing Between Capsules", 2017.
+- Hinton, Sabour, and Frosst, "Matrix Capsules with EM Routing", 2018.
+- Jacobs, Jordan, Nowlan, and Hinton, "Adaptive Mixtures of Local Experts", 1991.
+- Shazeer et al., "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer", 2017.
+- Li et al., "Ternary Weight Networks", 2016.
+- Trabelsi et al., "Deep Complex Networks", 2018.
+- He et al., "Deep Residual Learning for Image Recognition", 2016.
+- Dosovitskiy et al., "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale", 2021.
 
 ## 3. Models
 
@@ -396,14 +406,4 @@ Figure 4: Probe R2 comparison for residual CNN, ViT, complex phase, and real cap
 
 ## References To Fill
 
-TODO: Dynamic routing capsules.
-
-TODO: Matrix capsules / EM routing.
-
-TODO: AffNIST dataset source.
-
-TODO: ResNet.
-
-TODO: Vision Transformer.
-
-TODO: Complex-valued neural networks and phase representations.
+TODO: Add full BibTeX entries and dataset citations for the final submission.
