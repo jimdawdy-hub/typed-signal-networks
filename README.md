@@ -1,8 +1,15 @@
 # AI Unity
 
-AI Unity is a small research codebase for asking a simple question:
+AI Unity started from a simple but specific question: can a neural signal carry more than just magnitude?
 
-Can learned phase in a capsule network actually make a vision model more robust to geometric change?
+In ordinary neural nets, a value is mostly just a number. The idea behind this project was to ask whether the signal itself could carry an additional meaningful state, like identity, phase, or type, so that the next layer could treat
+the same value differently depending on what kind of signal it was. That line of thinking led to capsule networks, complex-valued activations, and routing mechanisms that try to preserve more structure than a standard scalar pipeline.
+
+This repository tests that idea in a controlled way. The core experiments compare learned-phase complex capsules against real-valued capsule controls, parameter-matched CNN and ViT baselines, and a stronger residual CNN baseline on
+synthetic affine MNIST and AffNIST. The result is nuanced: learned phase does help within the capsule family, but stronger conventional models do better overall, and the broad robustness claim does not hold up. That makes the project
+less a victory lap and more a clean diagnostic study of what learned phase can and cannot do.
+
+The work started with trying to determine if learned phase in a capsule network actually make a vision model more robust to geometric change?
 
 The short answer from these experiments is: a little, but not enough.
 
