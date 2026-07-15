@@ -31,3 +31,18 @@ Thumbs.db
 
 # Raw chat transcript not intended for publication
 ai unity chat.md
+
+# LaTeX build artifacts (source of truth is paper/main.tex + references.bib)
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.pdf
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+
+# Generated arXiv packaging outputs (regenerate via arxiv-prep skill)
+/paper_arXiv/
+/arxiv-submission.tar

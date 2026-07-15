@@ -1,0 +1,457 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage[numbers]{natbib}
+\usepackage{tabularx}
+\usepackage{xcolor}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+}
+
+\title{When Learned Phase Is Not Enough: A Diagnostic Evaluation of Typed Neural Signals for Affine Robustness}
+\author{Jim Dawdy}
+\date{July 14, 2026 (second draft; first draft June 28, 2026)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Capsule networks are motivated by the idea that structured activations can represent pose more explicitly than scalar features. We test whether learned complex phase in a capsule network improves affine robustness, comparing a learned-phase complex capsule, \texttt{ComplexCapsuleB}, against a parameter-matched real capsule control, a parameter-matched CNN and Vision Transformer, and a stronger residual CNN. An earlier control, \texttt{RealCapsuleLarge}, matched the complex model's parameter count but harbored two confounds: its extra parameters were functionally degenerate (two summed linear banks collapse to one linear map), and its readout had a smaller dynamic range under cross-entropy. We replace it with \texttt{RealCapsuleControlV2}, matched in count, width, and readout form, isolating each confound via single-fix ablations. The confounds explain roughly half the originally reported held-out gap ($+5.07$ to $+2.56$ points), but a genuine effect survives: across four seeds, \texttt{ComplexCapsuleB} beats the corrected control on random affine ($+2.22$ points) and held-out affine ($+2.56$ points) distributions, positive in every seed. That improvement does not carry over to stronger baselines: a parameter-matched CNN beats the complex capsule on sampled affine tests, and a smaller residual CNN dominates every synthetic and AffNIST evaluation. On independent AffNIST, \texttt{ComplexCapsuleB} loses to the corrected control by roughly 11 points resized and 17 points native --- the decisive negative result is strengthened, not weakened, by removing the confounds. Linear probes show learned phase carries compact pose information, but residual CNN and ViT features encode affine factors more strongly. The result is narrow but useful: learned phase improves a capsule model relative to a properly matched real control, yet the current architecture is not competitive with strong conventional models for affine robustness.
+\end{abstract}
+
+\section{Introduction}
+Deep image classifiers often succeed by learning features that are tolerant to nuisance transformations. Convolutional networks build in translation bias through weight sharing and local receptive fields, while residual architectures and transformer-style models can learn broad invariances from data and augmentation. Capsule networks propose a different mechanism: instead of hiding pose variation inside high-dimensional scalar feature maps, capsules attempt to represent object identity and pose in structured activations.
+
+This project began with a stronger hypothesis: if capsule activations are represented as complex numbers, then phase might carry pose-like information. Rotations and other geometric changes often have angular structure, so a learned phase channel could, in principle, provide a better coordinate system for transformation robustness.
+
+The experiments below test that hypothesis directly. The answer is mixed, and the important result is negative. Learned phase helps within the capsule family: after mild affine augmentation, \texttt{ComplexCapsuleB} consistently beats a parameter-matched real capsule control on synthetic affine distributions. Getting that comparison right turned out to be the hardest part of the study. Our first control matched the complex model's parameter count exactly but was confounded in two ways we did not initially recognize --- its added parameters were provably redundant, and its class readout was handicapped under the shared loss. Fixing both confounds cut the capsule-family margin roughly in half; it did not eliminate it. But the result does not survive stronger baselines. A parameter-matched CNN is better on sampled affine tests, a parameter-matched ViT gives stronger representation probes, and a smaller residual CNN dominates both synthetic affine tests and AffNIST. On AffNIST, the complex capsule also loses to the corrected real capsule control.
+
+The main contribution is therefore diagnostic rather than state-of-the-art. It identifies where a plausible learned-phase capsule idea works, where it fails, which control-design mistakes can silently inflate a capsule-family result, and which evidence should prevent overclaiming.
+
+We make five contributions:
+\begin{enumerate}
+  \item We introduce and evaluate a learned-phase complex capsule model against a real capsule control matched in parameter count, representational width, and readout form.
+  \item We identify two confounds --- degenerate control capacity and asymmetric readout dynamic range --- that inflated the initially reported capsule-family gap, and we quantify each with single-fix ablation controls.
+  \item We evaluate robustness across fixed rotations, synthetic affine transformations, held-out affine distributions, and the AffNIST transformed test set.
+  \item We compare against parameter-matched CNN and ViT baselines, plus a stronger residual CNN baseline with fewer parameters.
+  \item We use linear probes to ask whether learned phase carries pose-related information even when it fails to win classification accuracy.
+\end{enumerate}
+
+\section{Prior Work and Hypothesis}
+Capsule networks represent entities with vectors rather than scalar activations, and routing procedures decide how lower-level capsules contribute to higher-level capsules. The motivating claim is that capsule dimensions can encode pose-like degrees of freedom while capsule length or norm encodes class evidence \citep{sabour2017dynamic,hinton2018matrix}.
+
+Complex-valued representations add another structure: magnitude can represent evidence strength, while phase can represent a periodic or angular variable \citep{trabelsi2018deepcomplex}. This suggests a natural hypothesis:
+\begin{quote}
+  A capsule model with learned complex phase should better represent affine nuisance factors, improving robustness to transformations relative to a real-valued capsule with the same parameter budget.
+\end{quote}
+
+Testing that hypothesis requires care about what ``the same parameter budget'' means. As Section~\ref{sec:models} details, an equal parameter count can conceal an unequal capacity or an unequal readout, and either can masquerade as a phase effect.
+
+This paper separates three claims that are easy to conflate:
+\begin{enumerate}
+  \item Capsule-family claim: learned phase improves over a properly matched real capsule control.
+  \item Baseline claim: learned phase beats conventional CNN or transformer baselines.
+  \item Representation claim: learned phase encodes pose or affine factors in a probe-detectable way.
+\end{enumerate}
+
+The experiments support the first claim on synthetic affine data (at roughly half the margin originally reported, after two control confounds are removed), partially support the third claim, and reject the second claim.
+
+Relevant prior work includes transforming auto-encoders \citep{hinton2011transforming}, capsule routing \citep{sabour2017dynamic,hinton2018matrix}, adaptive mixtures of local experts and MoE gating \citep{jacobs1991adaptive,shazeer2017outrageously}, ternary weight networks \citep{li2016ternary}, complex-valued neural networks \citep{trabelsi2018deepcomplex}, residual networks \citep{he2016deepresidual}, and Vision Transformers \citep{dosovitskiy2021image}.
+
+\section{Models}
+\label{sec:models}
+All models are trained and evaluated on grayscale digit images. The core comparison uses four seeds: 123, 321, 777, and 2024.
+
+\subsection{Learned-Phase Complex Capsule}
+\texttt{ComplexCapsuleB} is the learned-phase model under study. It uses a 9x9 convolutional stem with 256 channels, one primary magnitude convolution bank, one primary phase convolution bank, complex transformation matrices built from real and imaginary parameter banks, complex squash and complex agreement during routing, 3 routing iterations, and 10 class capsules of dimension 8 (complex). Class evidence is read out as the sum of per-dimension magnitudes of the squashed class capsule, bounded by $\sqrt{8}$.
+
+Magnitude is passed through \texttt{softplus}; phase is learned directly. The model returns \texttt{digit\_caps}, \texttt{primary\_phase}, and \texttt{digit\_phase} for diagnostics. It has 2{,}767{,}568 trainable parameters by tensor-element count. (One footnote for exactness: the routing bias is stored as a complex tensor, so in raw real scalars the model has 2{,}767{,}648 --- 80 more than the real controls, a 0.003\% difference we treat as immaterial.)
+
+\subsection{Real Capsule Control (Corrected): \texttt{RealCapsuleControlV2}}
+\label{sec:controlv2}
+Designing the real-valued control is the crux of the capsule-family comparison, and our first attempt got it wrong (Section~\ref{sec:confounds}). The corrected control, \texttt{RealCapsuleControlV2}, is matched to the complex model on three axes rather than parameter count alone:
+\begin{itemize}
+  \item \textbf{Parameter count.} Exactly 2{,}767{,}568 trainable parameters, equal to \texttt{ComplexCapsuleB}.
+  \item \textbf{Representational width.} A complex 8-dimensional primary capsule is 16 real dimensions. The control therefore uses one genuinely wider primary bank producing 16-dimensional real primary capsules --- spending its budget the same way the complex model does, on a single wide primary representation and a correspondingly larger transformation tensor, rather than on redundant duplicate banks.
+  \item \textbf{Readout form.} The class score is the sum of per-dimension absolute values of the squashed class capsule --- the identical functional form and identical $\sqrt{8}$ bound as the complex model's magnitude-sum readout.
+\end{itemize}
+
+Concretely: the same 9x9 stem, one primary convolution bank producing 8 capsule types of dimension 16, a single transformation tensor of shape $[10, 72, 8, 16]$, 3 routing iterations, and 10 class capsules of dimension 8.
+
+The remaining differences between \texttt{ComplexCapsuleB} and \texttt{RealCapsuleControlV2} are intrinsic to the hypothesis being tested: the complex model constrains its 16 real primary dimensions into 8 magnitude-phase pairs (with \texttt{softplus} magnitudes) and its transformation obeys complex-multiplication weight tying, while the control's 16 dimensions and transformation are unconstrained. That is the comparison the learned-phase hypothesis calls for.
+
+\subsection{The Original Control and Its Two Confounds}
+\label{sec:confounds}
+The first draft of this study used \texttt{RealCapsuleLarge} as the control. It reached the same 2{,}767{,}568 parameters by adding a second primary convolution bank and a second transformation bank whose outputs were simply summed with the first. We retain it in the results as a cautionary baseline, because it carries two confounds that inflated the originally reported capsule-family gap:
+\begin{enumerate}
+  \item \textbf{Degenerate capacity.} The sum of two linear maps is a single linear map. We verified numerically that merging the two banks reproduces \texttt{RealCapsuleLarge}'s outputs to $7 \times 10^{-10}$: the control is functionally identical to the 1{,}394{,}320-parameter small real capsule. Its parameter count matched the complex model; its expressive capacity did not.
+  \item \textbf{Readout dynamic range.} \texttt{RealCapsuleLarge} read out class evidence as the L2 norm of the squashed class capsule, which squash bounds below 1.0, while the complex model's magnitude-sum readout is bounded by $\sqrt{8} \approx 2.83$. Both scores feed a shared softmax cross-entropy, so the real control's maximum achievable logit separation --- and with it its confidence ceiling and gradient signal --- was structurally capped at roughly one third of the complex model's, purely by readout choice. (Sabour et al.'s margin loss avoids exactly this trap; under cross-entropy the readout forms must be matched instead.)
+\end{enumerate}
+
+To attribute the two confounds separately we also train two single-fix ablations:
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}lXXX@{}}
+\toprule
+Model & Architecture & Readout & Isolates \\
+\midrule
+\texttt{RealCapsuleLargeL1} & original degenerate two-bank & magnitude-sum ($\sqrt{8}$ bound) & readout fix only \\
+\texttt{RealCapsuleControlV2Norm} & corrected wide single-bank & L2 norm (bound 1.0) & capacity fix only \\
+\texttt{RealCapsuleControlV2} & corrected wide single-bank & magnitude-sum ($\sqrt{8}$ bound) & both fixes \\
+\bottomrule
+\end{tabularx}
+\caption{Confound ablation controls. All three have exactly 2,767,568 trainable parameters.}
+\label{tab:ablation-models}
+\end{table}
+
+\subsection{Parameter-Matched CNN}
+\texttt{BaselineCNN} is a conventional convolutional baseline with convolution layers of 64 and 128 channels, max pooling, adaptive average pooling to 7x7, and a three-layer MLP classifier head. It has 2{,}768{,}502 parameters, within 0.034\% of the capsule parameter budget.
+
+\subsection{Parameter-Matched Vision Transformer}
+\texttt{VisionTransformerBaseline} is a small ViT-style model with 4x4 patch embedding, a learned CLS token, a learned positional embedding, 9 transformer encoder layers, width 192, 4 attention heads, and feed-forward width 384. It has 2{,}767{,}663 parameters, matching the capsule and CNN budget.
+
+\subsection{Residual CNN Baseline}
+\texttt{ResidualCNNBaseline} is a stronger conventional baseline with a 3x3 convolutional stem, six residual blocks, channels 64, 128, and 192, adaptive average pooling, and a linear classifier. It has 1{,}919{,}178 parameters, fewer than the matched capsule, CNN, and ViT models. This model is not a parameter-matched control; it is included as a stronger conventional architecture check.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}lXr@{}}
+\toprule
+Model & Summary & Params \\
+\midrule
+\texttt{ComplexCapsuleB} & Learned-phase complex capsule; magnitude-sum readout & 2,767,568 \\
+\texttt{RealCapsuleControlV2} & Corrected control: wide single-bank, matched readout & 2,767,568 \\
+\texttt{RealCapsuleLarge} & Original (confounded) control: degenerate two-bank, L2-norm readout & 2,767,568 \\
+\texttt{RealCapsuleLargeL1} & Readout-fix-only ablation & 2,767,568 \\
+\texttt{RealCapsuleControlV2Norm} & Capacity-fix-only ablation & 2,767,568 \\
+\texttt{BaselineCNN} & Parameter-matched convolutional baseline with max pooling and an MLP head & 2,768,502 \\
+\texttt{VisionTransformerBaseline} & Small ViT-style baseline with patch embedding, CLS token, and 9 encoder layers & 2,767,663 \\
+\texttt{ResidualCNNBaseline} & Stronger conventional baseline with six residual blocks and fewer parameters & 1,919,178 \\
+\bottomrule
+\end{tabularx}
+\caption{Main model families and parameter budgets.}
+\label{tab:models}
+\end{table}
+
+\section{Experimental Setup}
+
+\subsection{Training Protocol}
+Models are trained for 20 epochs with Adam at learning rate $10^{-3}$, using best-checkpoint selection by test accuracy. All reported synthetic affine and AffNIST results use best checkpoints.
+
+Two protocol details deserve explicit disclosure. First, best-checkpoint selection uses the MNIST test split --- the same 10,000 images whose transformed versions the synthetic affine evaluations report on. Selection is over only 20 epochs and is applied identically to every model, and the AffNIST evaluation uses an entirely independent image set, so the model orderings are unaffected; but the training-accuracy numbers in Section~\ref{sec:results} are max-over-epochs statistics and are optimistically biased in absolute terms. Second, the ``mild random affine augmentation'' below draws one transform per training image at dataset construction and replays it every epoch --- a fixed re-rendered training set, not fresh per-epoch augmentation. This too is identical across models, so relative comparisons stand, but absolute robustness numbers should not be compared against standard per-epoch-augmentation results in the literature.
+
+The mild affine training recipe:
+\begin{itemize}
+  \item rotation: $[-30, 30]$ degrees,
+  \item translation: up to 15\%,
+  \item scale: $[0.85, 1.15]$,
+  \item x shear: $[-15, 15]$ degrees,
+  \item y shear: 0.
+\end{itemize}
+
+Experiments are run with four seeds: 123, 321, 777, and 2024. In the first-draft runs the seed controlled data order and augmentation draws but not weight initialization (models were constructed before the seed was applied), so those runs were independent but not exactly reproducible from the stated seed. This is fixed in the current code: seeding now precedes model construction, and the confound-ablation runs of Section~\ref{sec:ablation} are reproducible from their seeds. Because the fix changes only reproducibility, not the statistical independence of the four runs, we retain the first-draft results for the unchanged models rather than retraining them.
+
+All reported uncertainty is the population standard deviation over the four seeds (divisor $n$, not $n-1$). With $n = 4$ we treat means, per-seed sign consistency, and margins well outside seed spread as the meaningful evidence, and we flag comparisons that fall inside seed noise.
+
+\subsection{Synthetic Evaluation}
+We evaluate fixed affine transformations and random affine transformation distributions. The random in-distribution evaluation covers \texttt{random\_translate}, \texttt{random\_translate\_scale}, \texttt{random\_affine\_mild}, and \texttt{random\_affine\_strong}, each evaluated with five independently sampled test sets per seed.
+
+We also define two held-out affine scenarios outside the mild training range: \texttt{heldout\_affine\_left\_zoom} (rotation $[-60, -30]$, scale $[0.70, 0.85]$, negative x/y shear) and \texttt{heldout\_affine\_right\_zoom} (rotation $[30, 60]$, scale $[1.15, 1.35]$, positive x/y shear). These held-out distributions are intended to test extrapolation rather than interpolation within the augmentation distribution. The held-out translation range, up to 25\%, also exceeds the 15\% training range --- the shift is stronger than rotation/scale/shear alone would suggest.
+
+\subsection{AffNIST Evaluation}
+We evaluate on the official AffNIST transformed test set \citep{affnist}. Two protocols are reported: resized 28x28 (AffNIST images resized down to the MNIST input size) and native 40x40 transfer (AffNIST images evaluated at original 40x40 size using checkpoint-compatible model adaptations). The native 40x40 result is a transfer test from 28x28 training, not canonical native AffNIST training. CNNs use adaptive pooling, the ViT interpolates positional embeddings, and capsules adaptively pool primary maps to the trained routing shape.
+
+\subsection{Representation Probes}
+To test whether learned phase encodes affine factors, we train Ridge linear probes on hidden representations. For each held-out affine scenario, probes are trained on 2,000 examples and tested on 2,000 examples. Probe targets are rotation angle, x translation, y translation, scale, x shear, and y shear. Probe performance is reported as mean $R^2$ and normalized MAE, averaged over affine factors and held-out scenarios. Feature blocks include CNN penultimate features, residual CNN pooled features, ViT CLS embeddings, real capsule digit capsules, and complex capsule phase summaries.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Training Accuracy}
+On the affine-augmented MNIST test split, the residual CNN is strongest, followed by the parameter-matched CNN. \texttt{ComplexCapsuleB} beats both the original and the corrected real capsule controls, but not the CNN baselines.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Model & Mean Best Test Accuracy & Std \\
+\midrule
+ResidualCNNBaseline & 98.905\% & 0.068 \\
+BaselineCNN & 97.883\% & 0.040 \\
+ComplexCapsuleB & 97.157\% & 0.090 \\
+RealCapsuleControlV2 (corrected control) & 96.668\% & 0.105 \\
+RealCapsuleLarge (original control) & 96.280\% & 0.135 \\
+VisionTransformerBaseline & 94.133\% & 0.562 \\
+\bottomrule
+\end{tabular}
+\caption{Affine-augmented MNIST test accuracy across four seeds.}
+\label{tab:train}
+\end{table}
+
+This result already narrows the claim. Learned phase improves the capsule model relative to the real capsule controls, but a simple parameter-matched CNN is stronger, and a smaller residual CNN is stronger still. The corrected control recovers about 0.4 points of the original control's deficit, a first sign that the original comparison overstated the phase effect.
+
+\subsection{Synthetic Random Affine Evaluation}
+On in-distribution random affine scenarios, \texttt{ComplexCapsuleB} again beats both capsule controls, but loses to both CNN baselines.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lr}
+\toprule
+Model & Mean Accuracy \\
+\midrule
+ResidualCNNBaseline & 98.124\% \\
+BaselineCNN & 92.409\% \\
+ComplexCapsuleB & 91.191\% \\
+RealCapsuleControlV2 (corrected control) & 88.968\% \\
+VisionTransformerBaseline & 88.853\% \\
+RealCapsuleLarge (original control) & 88.488\% \\
+\bottomrule
+\end{tabular}
+\caption{Mean accuracy on random affine test distributions.}
+\label{tab:randomaffine}
+\end{table}
+
+The capsule-family margin is real but smaller than first reported: ComplexCapsuleB $-$ RealCapsuleControlV2 $= +2.223$ percentage points against the corrected control (versus $+2.703$ against the original confounded control), positive in every seed ($+2.49$, $+2.77$, $+1.72$, $+1.90$). But the model-family conclusion is different: BaselineCNN $-$ ComplexCapsuleB $= +1.218$ percentage points on the same sampled random affine setup, and the residual CNN widens the conventional-baseline advantage dramatically.
+
+\subsection{Held-Out Synthetic Affine Evaluation}
+Held-out affine shifts are harder. They move outside the mild training ranges, combining stronger rotations, scale changes, translations, and shear.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lr}
+\toprule
+Model & Mean Accuracy \\
+\midrule
+ResidualCNNBaseline & 78.358\% \\
+BaselineCNN & 50.518\% \\
+VisionTransformerBaseline & 46.411\% \\
+ComplexCapsuleB & 46.276\% \\
+RealCapsuleControlV2 (corrected control) & 43.715\% \\
+RealCapsuleLarge (original control) & 41.210\% \\
+\bottomrule
+\end{tabular}
+\caption{Mean accuracy on held-out affine distributions.}
+\label{tab:heldout}
+\end{table}
+
+The ViT and \texttt{ComplexCapsuleB} means differ by only 0.135 points with seed standard deviations several times larger; we treat those two models as tied on this evaluation rather than ordered.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+Scenario & CNN & ResNet & ViT & RealLarge & ComplexB \\
+\midrule
+heldout\_affine\_left\_zoom & 47.075\% & 79.329\% & 41.663\% & 37.334\% & 42.721\% \\
+heldout\_affine\_right\_zoom & 53.960\% & 77.386\% & 51.158\% & 45.087\% & 49.832\% \\
+\bottomrule
+\end{tabular}
+\caption{Held-out affine breakdown by scenario.}
+\label{tab:heldout-breakdown}
+\end{table}
+
+The held-out result gave the most generous synthetic interpretation for learned phase in the first draft: \texttt{ComplexCapsuleB} improved over \texttt{RealCapsuleLarge} by roughly 5 points. Against the corrected control the margin is $+2.561$ points --- about half the original --- though still positive in every seed (Section~\ref{sec:ablation}). Either way, that advantage is below CNN and far below the residual CNN.
+
+\subsection{AffNIST Evaluation}
+AffNIST reverses even the capsule-family advantage. On independent transformed digits, \texttt{ComplexCapsuleB} loses to every real capsule control, original and corrected alike.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Model & Resized 28x28 & Native 40x40 \\
+\midrule
+ResidualCNNBaseline & 94.733\% & 97.459\% \\
+BaselineCNN & 71.347\% & 74.695\% \\
+VisionTransformerBaseline & 70.503\% & 74.409\% \\
+RealCapsuleControlV2 (corrected control) & 62.497\% & 54.370\% \\
+RealCapsuleLarge (original control) & 62.323\% & 51.956\% \\
+ComplexCapsuleB & 51.635\% & 37.309\% \\
+\bottomrule
+\end{tabular}
+\caption{AffNIST evaluation on resized and native-resolution transfer settings.}
+\label{tab:affnist}
+\end{table}
+
+This is the decisive negative result, and correcting the control strengthens it. If learned phase were producing robust reusable pose representations, AffNIST should be a favorable test. Instead, the complex capsule is worst among the main image models; the corrected control matches the original at 28x28 and beats it by 2.4 points at native 40x40, widening the complex model's deficit to roughly 10.9 points resized and 17.1 points native. Whatever the confounds gave the complex model on synthetic data, they were not what made it lose on AffNIST.
+
+The residual CNN result is especially important. It has fewer parameters than the matched CNN/ViT/capsule models and still reaches 94.733\% on resized AffNIST and 97.459\% on native 40x40 transfer. Architecture and optimization strength dominate the learned-phase effect.
+
+\subsection{Representation Probes}
+The probe results show why the learned-phase idea should not be discarded entirely. Complex primary phase summaries do encode affine information better than real capsule digit capsules.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Feature Block & Mean $R^2$ & Mean Normalized MAE \\
+\midrule
+Residual CNN features & 0.399 & 0.606 \\
+ViT CLS & 0.356 & 0.616 \\
+ComplexB primary phase stats & 0.277 & 0.688 \\
+Real capsule digit capsules & 0.049 & 0.838 \\
+\bottomrule
+\end{tabular}
+\caption{Linear probe performance for affine-factor recovery.}
+\label{tab:probes}
+\end{table}
+
+The phase representation is meaningful: it is compact and more predictive of affine factors than the real capsule representation. However, it is not the strongest representation overall. Residual CNN features and ViT CLS embeddings are better affine-factor probe targets.
+
+Two caveats on the probe ranking itself: the Ridge regularization strength is fixed ($\alpha = 10$) across feature blocks of different dimensionality rather than tuned per block, so the quantitative ordering should be read as approximate; and the headline mean $R^2$ is dominated by translation recovery --- per-factor results show \texttt{primary\_phase\_stats} recovering translation well ($R^2$ up to 0.86) but rotation only weakly ($R^2$ about 0.16), so ``phase carries pose information'' is, in these numbers, mostly ``phase carries translation information.''
+
+\subsection{Confound Ablation: How Much of the Capsule-Family Gap Was the Control's Fault?}
+\label{sec:ablation}
+The two confounds of Section~\ref{sec:confounds} were fixed and re-run under the identical training protocol (four seeds, 20 epochs, mild affine augmentation, best checkpoints, five random samples per scenario). \texttt{ComplexCapsuleB} numbers are the original run; the three controls are freshly trained.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Model & Train Best & Random Affine & Held-Out Affine \\
+\midrule
+ComplexCapsuleB & 97.157$\pm$0.090 & 91.191$\pm$0.404 & 46.277$\pm$0.844 \\
+RealCapsuleLarge (confounded) & 96.280$\pm$0.135 & 88.488$\pm$0.403 & 41.210$\pm$0.677 \\
+RealCapsuleLargeL1 (readout fix only) & 96.370$\pm$0.187 & 88.708$\pm$0.329 & 42.566$\pm$0.555 \\
+RealCapsuleControlV2Norm (capacity fix only) & 96.330$\pm$0.350 & 88.498$\pm$1.020 & 42.956$\pm$1.846 \\
+RealCapsuleControlV2 (both fixes) & 96.668$\pm$0.105 & 88.968$\pm$0.142 & 43.715$\pm$0.316 \\
+\bottomrule
+\end{tabular}
+\caption{Confound ablation: four-seed means with population standard deviation.}
+\label{tab:ablation-main}
+\end{table}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Control & Random Affine & Held-Out Affine \\
+\midrule
+RealCapsuleLarge (confounded) & +2.703 & +5.066 \\
+RealCapsuleLargeL1 (readout fix) & +2.483 & +3.711 \\
+RealCapsuleControlV2Norm (capacity fix) & +2.693 & +3.321 \\
+RealCapsuleControlV2 (both fixes) & +2.223 & +2.561 \\
+\bottomrule
+\end{tabular}
+\caption{ComplexCapsuleB-minus-control margins, all sign-consistent in 4 of 4 seeds.}
+\label{tab:ablation-margins}
+\end{table}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Control & Resized 28x28 & Native 40x40 \\
+\midrule
+RealCapsuleLarge (confounded) & 62.323$\pm$0.854 & 51.956$\pm$0.744 \\
+RealCapsuleLargeL1 (readout fix) & 62.375$\pm$0.528 & 50.364$\pm$2.614 \\
+RealCapsuleControlV2Norm (capacity fix) & 61.359$\pm$1.053 & 49.904$\pm$1.077 \\
+RealCapsuleControlV2 (both fixes) & 62.497$\pm$1.141 & 54.370$\pm$1.528 \\
+\bottomrule
+\end{tabular}
+\caption{AffNIST accuracy for the confound ablation controls.}
+\label{tab:ablation-affnist}
+\end{table}
+
+Three observations follow. First, the confounds were real and material: on held-out affine data --- the first draft's most favorable synthetic result --- fixing both confounds cuts the capsule-family margin roughly in half, from $+5.07$ to $+2.56$ points; on random affine distributions the reduction is smaller ($+2.70$ to $+2.22$). Second, the two fixes contribute roughly additively on held-out data: the readout fix alone improves the control by about 1.4 points and the capacity fix alone by about 1.7; together they yield 2.5 points of control improvement. Third, a genuine learned-phase effect survives the corrected control: the remaining margins are positive in every seed on both synthetic evaluations. The effect is smaller than first reported, but it is not an artifact of the control design. On AffNIST, however, the corrected control only extends the complex model's deficit.
+
+\section{Discussion}
+
+\subsection{What Worked}
+The central capsule-family result survives its strongest test: learned phase improves the complex capsule relative to a real capsule control matched in parameter count, representational width, and readout form, on synthetic affine distributions, in every seed. The first draft claimed this was ``not a trivial parameter-count artifact'' because both models had 2{,}767{,}568 parameters --- an argument the original control could not actually support, since its parameter match concealed a capacity mismatch and a readout handicap. The corrected claim is narrower and stronger: after removing both confounds (Section~\ref{sec:ablation}), a $+2.2$ to $+2.6$ point capsule-family margin remains, sign-consistent across seeds. Parameter count alone is not a sufficient matching criterion; the surviving margin rests on the corrected control, not the count.
+
+The phase probe also supports a mechanistic interpretation. \texttt{primary\_phase\_stats} produces stronger affine-factor probes than real capsule digit capsules, suggesting that learned phase stores transformation information --- predominantly translation --- in a compact form.
+
+\subsection{What Failed}
+The stronger robustness claim fails. First, the parameter-matched CNN is stronger than \texttt{ComplexCapsuleB} on sampled synthetic affine tests. Second, the ViT CLS representation is stronger than learned phase under linear probing. Third, the residual CNN dominates every synthetic and AffNIST evaluation while using fewer parameters. Fourth, AffNIST reverses the capsule-family result: the complex capsule loses to every real capsule control, including the corrected one, which beats it by an even wider margin at native size.
+
+These failures rule out the simple claim that learned complex phase is a broadly superior route to affine robustness.
+
+\subsection{Why AffNIST Matters}
+Synthetic affine MNIST is useful because it gives controlled factors and enables probes. But it is still generated by the same transform machinery used during evaluation. AffNIST is an independent transformed digit benchmark, and is therefore an important check against tuning to our synthetic generator.
+
+The AffNIST result is not a small degradation. On resized AffNIST, \texttt{ComplexCapsuleB} is roughly 10.9 points below the corrected \texttt{RealCapsuleControlV2}, 19.7 points below \texttt{BaselineCNN}, and 43.1 points below \texttt{ResidualCNNBaseline}. On native 40x40 transfer, the complex capsule falls further to 37.309\%, some 17.1 points below the corrected control. The synthetic-versus-AffNIST contrast is also consistent with a selection effect the protocol cannot fully exclude: best checkpoints are chosen on the MNIST test distribution that the synthetic evaluations re-transform, while AffNIST is untouched by selection --- and it is precisely on AffNIST that the capsule-family advantage disappears.
+
+\subsection{Negative Results as Useful Results}
+The experiment still contributes useful evidence. It identifies a real learned-phase effect, then shows that the effect is insufficient under stronger tests. This is valuable because capsule-style models are often motivated by qualitative intuitions about pose. Those intuitions need hard controls: real-valued capsule controls matched in capacity and readout, not merely parameter count; single-fix ablations that attribute any gap to specific control defects; parameter-matched CNN and transformer baselines; stronger conventional architecture baselines; independent datasets; and representation probes.
+
+Without these controls, the synthetic capsule-family improvement could easily be mistaken for a broader robustness result --- and, as Section~\ref{sec:ablation} shows, even a well-intentioned ``exactly parameter-matched'' control can silently inflate the effect being measured. Matching parameter counts is easy to verify and easy to get wrong: two summed linear banks pass the count check while adding no capacity, and a readout mismatch is invisible in any parameter table. We recommend that capsule-family comparisons verify controls functionally --- for example, by checking that the control cannot be losslessly compressed into a smaller model --- rather than arithmetically.
+
+\section{Limitations}
+This study has several limitations.
+
+First, the main training data is MNIST-derived. MNIST is useful for controlled pose and affine tests, but it is saturated and not representative of natural images.
+
+Second, the native 40x40 AffNIST result is a transfer protocol from 28x28 training. It is not canonical native AffNIST training. The native protocol's adaptive pooling of primary capsule maps plausibly hurts capsule routing more than pooling hurts a CNN head; it applies identically to real and complex capsules, so the capsule-family comparison is fair, but the native numbers should be read as capsule-unfavorable in absolute terms.
+
+Third, the residual CNN is not parameter-matched. It is intentionally included as a stronger conventional baseline, not as a fair capacity control. Its fewer-parameter dominance makes the result more damaging to the capsule robustness claim, but it does not isolate architecture from optimization and inductive-bias differences.
+
+Fourth, linear probes are not proof that a representation is causally used for classification. They show recoverability, not direct decision use. The probe ranking additionally uses a fixed Ridge $\alpha$ across feature blocks and is dominated by translation factors (Section~5.5).
+
+Fifth, the complex capsule implementation is only one design point. Other complex routing objectives, explicit equivariance constraints, different phase regularizers, or native spatial capsule architectures may behave differently.
+
+Sixth, checkpoint selection uses the MNIST test split rather than a held-out validation split. Orderings are unaffected --- selection applies identically to all models and AffNIST is independent --- but the training-accuracy numbers are optimistically biased, and a validation-split protocol would be cleaner.
+
+Seventh, the first-draft training runs (all models except the three ablation controls) were not exactly reproducible from their stated seeds because weight initialization preceded seeding; the code is fixed, but a full re-run of the unchanged models under seeded initialization has not been performed. The four runs per model remain statistically independent, which is what the seed-consistency evidence relies on.
+
+Eighth, with four seeds and no formal significance testing, we rely on per-seed sign consistency and margins large relative to seed spread. The load-bearing capsule-family margins pass that bar (4 of 4 seeds, means 3 to 8 times the seed standard deviation); comparisons flagged as within noise (ViT versus \texttt{ComplexCapsuleB} held-out) should not be cited as orderings.
+
+\section{Future Work}
+The most immediate follow-up is canonical native AffNIST training: train all image models directly on 40x40 inputs, include the residual CNN as the main conventional baseline, and keep \texttt{BaselineCNN}, \texttt{VisionTransformerBaseline}, \texttt{RealCapsuleControlV2}, and \texttt{ComplexCapsuleB} (the confounded \texttt{RealCapsuleLarge} can be dropped).
+
+The next controlled representation benchmarks should include datasets with explicit latent factors such as dSprites \citep{dsprites} and smallNORB \citep{smallnorb}. Those datasets should help separate pose structure from class recognition in a more controlled way than MNIST.
+
+Architecturally, future complex capsule work should test whether phase can be made more usable by the classifier. Possible directions include phase regularization, explicit equivariance losses, routing objectives that preserve phase information, or hybrid CNN/capsule models that use a stronger convolutional stem before capsule routing.
+
+\section{Conclusion}
+Learned complex phase is not a general source of transformation invariance. It improves a capsule model relative to a real capsule control matched in parameter count, capacity, and readout form on synthetic affine distributions --- by $+2.2$ to $+2.6$ points after two control confounds that had inflated the margin to $+2.7$/$+5.1$ were removed --- and its phase features carry recoverable affine information, mostly about translation. But the broader robustness claim fails under stronger baselines and independent evaluation. A parameter-matched CNN is stronger on sampled affine tests, ViT and residual CNN representations probe better for affine factors, and AffNIST reverses the capsule-family advantage against the corrected control by an even wider margin than against the original.
+
+The correct conclusion is therefore narrow and diagnostic, twice over. About the model: learned phase is a real but modest capsule-family mechanism worth studying, and the present architecture does not compete with strong conventional image models for affine robustness. About the method: a parameter-count match is not a control; the count concealed a degenerate architecture and a handicapped readout, and only single-fix ablations made the true size of the phase effect visible.
+
+\section{Reproducibility Notes}
+Latest verification at the time of writing: 55 tests passed, 1 skipped.
+
+Primary source files:
+\begin{itemize}
+  \item \texttt{ai\_unity/complex\_capsules.py} (includes \texttt{RealCapsuleNetControlV2}, \texttt{RealCapsuleNetControlV2Norm}, \texttt{RealCapsuleNetLargeL1})
+  \item \texttt{ai\_unity/training.py}
+  \item \texttt{ai\_unity/evaluate\_complex\_affines.py}
+  \item \texttt{ai\_unity/evaluate\_affine\_probes.py}
+  \item \texttt{ai\_unity/evaluate\_affnist.py}
+  \item \texttt{ai\_unity/data.py}
+\end{itemize}
+
+Primary result logs:
+\begin{itemize}
+  \item \texttt{UNITY\_NOTEBOOK.md}
+  \item \texttt{FINDINGS\_SUMMARY.md}
+  \item \texttt{CONTROL\_RERUN\_FINDINGS.md} (2026-07-14 confound ablation)
+\end{itemize}
+
+Seeding: runs from 2026-07-14 onward (the three ablation controls) seed before model construction and are exactly reproducible from \texttt{--seed}; earlier runs seeded data order and augmentation draws but not weight initialization. Reported standard deviations are population standard deviations over four seeds.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
