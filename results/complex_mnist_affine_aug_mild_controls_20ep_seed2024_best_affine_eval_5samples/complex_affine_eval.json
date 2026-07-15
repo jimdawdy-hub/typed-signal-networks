@@ -1,0 +1,876 @@
+{
+  "clean": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9853,
+      "loss": 0.4911359601974487,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9887,
+      "loss": 0.4794789032936096,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9848,
+      "loss": 1.4912844287872316,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "translate4": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.95,
+      "loss": 0.5872769598007203,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.952,
+      "loss": 0.5844996276855469,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9303,
+      "loss": 1.5494445066452027,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "translate8": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.175,
+      "loss": 2.6391540100097655,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.1496,
+      "loss": 2.5913522830963136,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.1107,
+      "loss": 2.336061325073242,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "scale085": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.975,
+      "loss": 0.5218940341472625,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9751,
+      "loss": 0.5151455279350281,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9733,
+      "loss": 1.5047065532684327,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "scale115": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9811,
+      "loss": 0.5054903982162475,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9852,
+      "loss": 0.4935218870162964,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9784,
+      "loss": 1.4983988847732543,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "shear15": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9815,
+      "loss": 0.5024114705085755,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9843,
+      "loss": 0.491839421415329,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9807,
+      "loss": 1.4961351177215576,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "affine_moderate": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.8219,
+      "loss": 0.8829156449317932,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.8319,
+      "loss": 0.8949615350723267,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.8122,
+      "loss": 1.6575810462951661,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "affine_strong": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.2313,
+      "loss": 2.3816899169921877,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.2725,
+      "loss": 2.2372452453613283,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.2722,
+      "loss": 2.1596347831726073,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_translate_sample1": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.8767,
+      "loss": 0.7613891460418701,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.88,
+      "loss": 0.7485178079605103,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.8472,
+      "loss": 1.6212222723007201,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_translate_sample2": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.8678,
+      "loss": 0.7723675539970398,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.8781,
+      "loss": 0.7577367330551148,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.8447,
+      "loss": 1.6243504467010499,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_translate_sample3": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.8811,
+      "loss": 0.7520592483520507,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.8841,
+      "loss": 0.7403949631690979,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.8505,
+      "loss": 1.6162827259063721,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_translate_sample4": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.8726,
+      "loss": 0.7669747011184692,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.8795,
+      "loss": 0.7508622933387756,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.8472,
+      "loss": 1.6230212589263917,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_translate_sample5": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.8731,
+      "loss": 0.7688115462303161,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.8789,
+      "loss": 0.7530325785636902,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.847,
+      "loss": 1.6202554706573487,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_translate_scale_sample1": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9422,
+      "loss": 0.6006993648052216,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9487,
+      "loss": 0.5899181385993958,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.93,
+      "loss": 1.5471563861846924,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_translate_scale_sample2": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.945,
+      "loss": 0.5974738328933716,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.949,
+      "loss": 0.5904874207973481,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9288,
+      "loss": 1.548796106338501,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_translate_scale_sample3": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9459,
+      "loss": 0.5948707406997681,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9511,
+      "loss": 0.5823521575927735,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9377,
+      "loss": 1.5427463682174682,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_translate_scale_sample4": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9445,
+      "loss": 0.5966315893173217,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9496,
+      "loss": 0.5812321005821228,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9328,
+      "loss": 1.5460354335784912,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_translate_scale_sample5": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9435,
+      "loss": 0.6012899165153504,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.949,
+      "loss": 0.5869841995239258,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9328,
+      "loss": 1.5451859127044678,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_affine_mild_sample1": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9656,
+      "loss": 0.5479520916461944,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9636,
+      "loss": 0.5444779808044433,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9545,
+      "loss": 1.523475863647461,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_affine_mild_sample2": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9618,
+      "loss": 0.5542452560424804,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9635,
+      "loss": 0.5461099403381348,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9543,
+      "loss": 1.5244437437057494,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_affine_mild_sample3": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9623,
+      "loss": 0.551543363237381,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9676,
+      "loss": 0.5425187669754028,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9569,
+      "loss": 1.5230427614212037,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_affine_mild_sample4": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9619,
+      "loss": 0.5541063665390015,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9669,
+      "loss": 0.5438526846885681,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9568,
+      "loss": 1.5231480564117432,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_affine_mild_sample5": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.9637,
+      "loss": 0.5513132848739624,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.9654,
+      "loss": 0.5478175936698914,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.9563,
+      "loss": 1.5226540397644044,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_affine_strong_sample1": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.7692,
+      "loss": 1.014157958126068,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.7721,
+      "loss": 1.0138907049179078,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.7326,
+      "loss": 1.7282051738739013,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_affine_strong_sample2": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.7645,
+      "loss": 1.021008684539795,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.7706,
+      "loss": 1.014284601020813,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.73,
+      "loss": 1.7300288524627685,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_affine_strong_sample3": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.7728,
+      "loss": 0.999003268814087,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.7777,
+      "loss": 0.9960029649734498,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.7429,
+      "loss": 1.7236524610519408,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_affine_strong_sample4": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.7636,
+      "loss": 1.0226007230758667,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.7686,
+      "loss": 1.0183149475097657,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.7278,
+      "loss": 1.7320990617752074,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "random_affine_strong_sample5": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.7707,
+      "loss": 1.0116927123069763,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.7761,
+      "loss": 1.0011131559371949,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.736,
+      "loss": 1.7235371814727782,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_left_zoom_sample1": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.4065,
+      "loss": 1.8723192684173584,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.4144,
+      "loss": 1.8544941932678223,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.3575,
+      "loss": 2.0700373405456545,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_left_zoom_sample2": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.4061,
+      "loss": 1.8777661520004272,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.4145,
+      "loss": 1.857460076522827,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.367,
+      "loss": 2.065649771118164,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_left_zoom_sample3": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.4157,
+      "loss": 1.8506006311416625,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.422,
+      "loss": 1.8226869054794312,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.3696,
+      "loss": 2.059869383049011,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_left_zoom_sample4": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.4118,
+      "loss": 1.8581442197799682,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.4148,
+      "loss": 1.8424930704116822,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.364,
+      "loss": 2.0657690128326416,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_left_zoom_sample5": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.4173,
+      "loss": 1.8577752433776855,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.4235,
+      "loss": 1.833271900177002,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.3695,
+      "loss": 2.0616579902648926,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_right_zoom_sample1": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.4484,
+      "loss": 1.745074838256836,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.4526,
+      "loss": 1.752374741744995,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.427,
+      "loss": 1.997236142349243,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_right_zoom_sample2": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.4527,
+      "loss": 1.7480273654937744,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.4535,
+      "loss": 1.7610711708068847,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.4313,
+      "loss": 1.9980030414581298,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_right_zoom_sample3": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.4599,
+      "loss": 1.7361069313049315,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.4563,
+      "loss": 1.740404132080078,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.4365,
+      "loss": 1.9907064792633056,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_right_zoom_sample4": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.4529,
+      "loss": 1.7434019104003906,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.4538,
+      "loss": 1.7486878650665283,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.4271,
+      "loss": 1.9952929147720337,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  },
+  "heldout_affine_right_zoom_sample5": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.4575,
+      "loss": 1.737771542930603,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.4576,
+      "loss": 1.7352037910461426,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.4371,
+      "loss": 1.9905437294006347,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  }
+}
