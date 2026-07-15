@@ -251,8 +251,98 @@ class RealCapsuleNetLarge(nn.Module):
             agreement = (u_hat * v.unsqueeze(2)).sum(dim=-1)
             b = b + agreement
 
-        probs = torch.sqrt((v**2).sum(dim=-1) + 1e-8)
+        probs = self._readout(v)
         return probs, {"digit_caps": v}
+
+    def _readout(self, v: torch.Tensor) -> torch.Tensor:
+        return torch.sqrt((v**2).sum(dim=-1) + 1e-8)
+
+
+class RealCapsuleNetLargeL1(RealCapsuleNetLarge):
+    """Readout-only ablation of RealCapsuleNetLarge.
+
+    Same (capacity-degenerate) two-bank architecture, but the class readout
+    matches ComplexCapsuleNetB: sum of per-dimension magnitudes, bounded by
+    sqrt(CLASS_DIM), instead of the L2 norm bounded by 1. Isolates the
+    readout-dynamic-range confound from the capacity confound.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.name = "RealCapsuleLargeL1"
+
+    def _readout(self, v: torch.Tensor) -> torch.Tensor:
+        return v.abs().sum(dim=-1)
+
+
+PRIMARY_DIM_V2 = 16
+
+
+class RealCapsuleNetControlV2(nn.Module):
+    """Non-degenerate parameter-matched real capsule control (both fixes).
+
+    Replaces RealCapsuleNetLarge's two summed duplicate banks (whose sum
+    collapses to a single linear map, adding no capacity) with one genuinely
+    wider primary bank: 16-dimensional primary capsules. This mirrors how
+    ComplexCapsuleNetB spends its budget — a complex 8-dim primary capsule is
+    16 real dimensions — so the control matches the complex model in both
+    parameter count and representational width.
+
+    The class readout also matches ComplexCapsuleNetB exactly in functional
+    form and bound: sum of per-dimension magnitudes of the squashed class
+    capsule, bounded by sqrt(CLASS_DIM) = sqrt(8), removing the dynamic-range
+    handicap of the L2-norm readout under cross-entropy.
+
+    Exactly 2,767,568 trainable parameters, equal to ComplexCapsuleNetB and
+    RealCapsuleNetLarge.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.name = "RealCapsuleControlV2"
+        self.conv1 = nn.Conv2d(1, 256, kernel_size=9, stride=1)
+        self.primary_conv = nn.Conv2d(
+            256, NUM_CAP_TYPES * PRIMARY_DIM_V2, kernel_size=CONV_KERNEL, stride=CONV_STRIDE
+        )
+        self.W = nn.Parameter(torch.randn(NUM_CLASSES, NUM_PRIMARY, CLASS_DIM, PRIMARY_DIM_V2) * 0.01)
+        self.bias = nn.Parameter(torch.zeros(NUM_CLASSES, 1, CLASS_DIM))
+
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, dict]:
+        B = x.shape[0]
+        h = F.relu(self.conv1(x))
+        h = self.primary_conv(h)
+        h = F.adaptive_avg_pool2d(h, (CAPSULE_SPATIAL, CAPSULE_SPATIAL))
+        h = h.view(B, NUM_CAP_TYPES, PRIMARY_DIM_V2, CAPSULE_SPATIAL, CAPSULE_SPATIAL)
+        h = h.permute(0, 1, 3, 4, 2).reshape(B, NUM_PRIMARY, PRIMARY_DIM_V2)
+        u = real_squash(h, dim=-1)
+        u_hat = torch.einsum("cnij,bnj->bcni", self.W, u)
+
+        b = torch.zeros(B, NUM_CLASSES, NUM_PRIMARY, device=x.device)
+        for _ in range(ROUTING_ITERS):
+            c = F.softmax(b, dim=1)
+            s = (c.unsqueeze(-1) * u_hat).sum(dim=2) + self.bias.squeeze(1)
+            v = real_squash(s, dim=-1)
+            agreement = (u_hat * v.unsqueeze(2)).sum(dim=-1)
+            b = b + agreement
+
+        probs = self._readout(v)
+        return probs, {"digit_caps": v}
+
+    def _readout(self, v: torch.Tensor) -> torch.Tensor:
+        return v.abs().sum(dim=-1)
+
+
+class RealCapsuleNetControlV2Norm(RealCapsuleNetControlV2):
+    """Capacity-only ablation: V2's non-degenerate wide architecture with the
+    original L2-norm readout of RealCapsuleNetLarge. Isolates the capacity fix
+    from the readout fix."""
+
+    def __init__(self):
+        super().__init__()
+        self.name = "RealCapsuleControlV2Norm"
+
+    def _readout(self, v: torch.Tensor) -> torch.Tensor:
+        return torch.sqrt((v**2).sum(dim=-1) + 1e-8)
 
 
 class ComplexCapsuleNetB(nn.Module):

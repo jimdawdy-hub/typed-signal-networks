@@ -18,7 +18,10 @@ from ai_unity.complex_capsules import (
     ComplexCapsuleNetB,
     ComplexCapsuleNetSpatialB,
     RealCapsuleNet,
+    RealCapsuleNetControlV2,
+    RealCapsuleNetControlV2Norm,
     RealCapsuleNetLarge,
+    RealCapsuleNetLargeL1,
     ResidualCNNBaseline,
     VisionTransformerBaseline,
 )
@@ -34,6 +37,9 @@ COMPLEX_MODEL_CHOICES = (
     "vit",
     "real",
     "real-large",
+    "real-large-l1",
+    "control-v2",
+    "control-v2-norm",
     "complex-b",
     "spatial-b",
     "complex-a",
@@ -475,6 +481,10 @@ def run_ternary(args) -> dict:
 
 
 def run_complex(args) -> dict:
+    # Seed BEFORE model construction so weight initialization is controlled by
+    # --seed (previously models were built from the process-entropy default RNG,
+    # making runs irreproducible from the stated seed).
+    seed_everything(args.seed)
     random_affine = COMPLEX_AFFINE_AUGMENTS.get(getattr(args, "affine_augment", "none"))
     loaders = get_mnist_pair_loaders(
         data_dir=args.data_dir,
@@ -494,6 +504,9 @@ def run_complex(args) -> dict:
         "vit": (VisionTransformerBaseline(), "img", loaders),
         "real": (RealCapsuleNet(), "img", loaders),
         "real-large": (RealCapsuleNetLarge(), "img", loaders),
+        "real-large-l1": (RealCapsuleNetLargeL1(), "img", loaders),
+        "control-v2": (RealCapsuleNetControlV2(), "img", loaders),
+        "control-v2-norm": (RealCapsuleNetControlV2Norm(), "img", loaders),
         "complex-b": (ComplexCapsuleNetB(), "img", loaders),
         "spatial-b": (ComplexCapsuleNetSpatialB(), "img", loaders),
         "complex-a": (ComplexCapsuleNetA(), "img", loaders),

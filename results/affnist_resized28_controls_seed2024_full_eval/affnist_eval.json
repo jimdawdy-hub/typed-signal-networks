@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "dataset": "AffNIST transformed test set",
+    "source": "https://www.cs.toronto.edu/~tijmen/affNIST/32x/transformed/test.mat.zip",
+    "original_size": 40,
+    "resize": 28,
+    "test_subset": null,
+    "comparison_json": [
+      "results/complex_mnist_affine_aug_mild_controls_20ep_seed2024/complex_capsules_comparison.json"
+    ]
+  },
+  "affnist": {
+    "RealCapsuleLargeL1": {
+      "accuracy": 0.621096875,
+      "loss": 1.3846877925872803,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2": {
+      "accuracy": 0.644653125,
+      "loss": 1.3426216035842895,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    },
+    "RealCapsuleControlV2Norm": {
+      "accuracy": 0.598228125,
+      "loss": 1.8691660017967224,
+      "phase_mean": null,
+      "phase_std": null,
+      "phase_collapsed": null
+    }
+  }
+}
