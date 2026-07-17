@@ -18,7 +18,7 @@
 }
 
 \title{When Learned Phase Is Not Enough: A Diagnostic Evaluation of Typed Neural Signals for Affine Robustness}
-\author{Jim Dawdy}
+\author{James Dawdy}
 \date{July 14, 2026 (second draft; first draft June 28, 2026)}
 
 \begin{document}
@@ -29,9 +29,11 @@ Capsule networks are motivated by the idea that structured activations can repre
 \end{abstract}
 
 \section{Introduction}
-Deep image classifiers often succeed by learning features that are tolerant to nuisance transformations. Convolutional networks build in translation bias through weight sharing and local receptive fields, while residual architectures and transformer-style models can learn broad invariances from data and augmentation. Capsule networks propose a different mechanism: instead of hiding pose variation inside high-dimensional scalar feature maps, capsules attempt to represent object identity and pose in structured activations.
+This project began with a question that is easy to state but harder to make precise: can a learned signal carry useful structure beyond its immediate numerical value? I was drawn to the possibility that a representation might encode not only ``how much'' evidence it contains, but something about how that evidence should be interpreted downstream---for example, its orientation, phase, or role in a larger computation.
 
-This project began with a stronger hypothesis: if capsule activations are represented as complex numbers, then phase might carry pose-like information. Rotations and other geometric changes often have angular structure, so a learned phase channel could, in principle, provide a better coordinate system for transformation robustness.
+That intuition is not a claim that modern neural networks are made only of scalars, or that complex numbers somehow create information from nothing. Neural networks already use vector- and tensor-valued representations, and a real-valued model with the same number of degrees of freedom can in principle represent the same information. The more modest possibility is that a particular representation may make some structure easier to learn. Complex-valued networks offer magnitude and phase as an inductive bias; capsule networks offer a setting in which pose-like properties are meant to be represented explicitly.
+
+I wanted to see whether that intuition survives a controlled test. The resulting question is deliberately narrow: does learned complex phase improve a capsule model's robustness to affine transformations relative to a carefully matched real-valued capsule control? This paper follows that question where the experiments lead---including the places where the original comparison was confounded, the narrower effect that remains after correction, and the stronger tests on which the approach fails.
 
 The experiments below test that hypothesis directly. The answer is mixed, and the important result is negative. Learned phase helps within the capsule family: after mild affine augmentation, \texttt{ComplexCapsuleB} consistently beats a parameter-matched real capsule control on synthetic affine distributions. Getting that comparison right turned out to be the hardest part of the study. Our first control matched the complex model's parameter count exactly but was confounded in two ways we did not initially recognize --- its added parameters were provably redundant, and its class readout was handicapped under the shared loss. Fixing both confounds cut the capsule-family margin roughly in half; it did not eliminate it. But the result does not survive stronger baselines. A parameter-matched CNN is better on sampled affine tests, a parameter-matched ViT gives stronger representation probes, and a smaller residual CNN dominates both synthetic affine tests and AffNIST. On AffNIST, the complex capsule also loses to the corrected real capsule control.
 
@@ -450,6 +452,10 @@ Primary result logs:
 \end{itemize}
 
 Seeding: runs from 2026-07-14 onward (the three ablation controls) seed before model construction and are exactly reproducible from \texttt{--seed}; earlier runs seeded data order and augmentation draws but not weight initialization. Reported standard deviations are population standard deviations over four seeds.
+
+\section*{Author and Generative-AI Use Disclosure}
+
+This research was initiated, directed, reviewed, and substantively edited by the author. Generative-AI systems were used as technical collaborators during the project: Opus 4.8 assisted with coding and test execution; Fable 5 reviewed the work and supported the second-draft reruns; MiMov2.5-Pro assisted with \LaTeX{} editing; and GPT-5.6 Terra assisted with stylistic editing. The author reviewed the experimental design, code, results, interpretations, and final manuscript, and takes responsibility for the paper's claims and any remaining errors.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
