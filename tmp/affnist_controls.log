@@ -1,0 +1,40 @@
+
+AffNIST resized 28x28
+  RealCapsuleLargeL1: acc=63.22% loss=1.3431
+  RealCapsuleControlV2: acc=61.87% loss=1.3811
+  RealCapsuleControlV2Norm: acc=61.35% loss=1.8722
+
+AffNIST resized 40x40
+  RealCapsuleLargeL1: acc=51.32% loss=1.5842
+  RealCapsuleControlV2: acc=55.16% loss=1.4977
+  RealCapsuleControlV2Norm: acc=48.24% loss=1.9605
+
+AffNIST resized 28x28
+  RealCapsuleLargeL1: acc=61.80% loss=1.3764
+  RealCapsuleControlV2: acc=61.97% loss=1.3940
+  RealCapsuleControlV2Norm: acc=62.79% loss=1.8600
+
+AffNIST resized 40x40
+  RealCapsuleLargeL1: acc=49.82% loss=1.6201
+  RealCapsuleControlV2: acc=53.37% loss=1.5596
+  RealCapsuleControlV2Norm: acc=51.25% loss=1.9558
+
+AffNIST resized 28x28
+  RealCapsuleLargeL1: acc=62.38% loss=1.3701
+  RealCapsuleControlV2: acc=61.69% loss=1.3839
+  RealCapsuleControlV2Norm: acc=61.47% loss=1.8580
+
+AffNIST resized 40x40
+  RealCapsuleLargeL1: acc=46.55% loss=1.6425
+  RealCapsuleControlV2: acc=52.51% loss=1.5520
+  RealCapsuleControlV2Norm: acc=50.14% loss=1.9364
+
+AffNIST resized 28x28
+  RealCapsuleLargeL1: acc=62.11% loss=1.3847
+  RealCapsuleControlV2: acc=64.47% loss=1.3426
+  RealCapsuleControlV2Norm: acc=59.82% loss=1.8692
+
+AffNIST resized 40x40
+  RealCapsuleLargeL1: acc=53.76% loss=1.5427
+  RealCapsuleControlV2: acc=56.44% loss=1.5156
+  RealCapsuleControlV2Norm: acc=49.98% loss=1.9207
