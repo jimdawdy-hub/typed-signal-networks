@@ -1,0 +1,470 @@
+{
+  "RealCapsuleLargeL1": {
+    "params": 2767568,
+    "history": [
+      {
+        "epoch": 1,
+        "train_acc": 0.26223958333333336,
+        "test_acc": 0.4171875,
+        "train_loss": 2.1488691846529644,
+        "test_loss": 1.8546753406524659,
+        "aux_loss": 0.0,
+        "time": 2.397406816482544
+      },
+      {
+        "epoch": 2,
+        "train_acc": 0.5466145833333333,
+        "test_acc": 0.6296875,
+        "train_loss": 1.6360220313072205,
+        "test_loss": 1.4958770275115967,
+        "aux_loss": 0.0,
+        "time": 1.5566368103027344
+      }
+    ],
+    "final_train_acc": 0.5466145833333333,
+    "final_test_acc": 0.6296875,
+    "final_test_loss": 1.4958770275115967,
+    "total_time": 4.596891403198242,
+    "checkpoint": "tmp/smoke_controls_ckpt/complex_capsules_RealCapsuleLargeL1_seed99.pt",
+    "latest_checkpoint": "tmp/smoke_controls_ckpt/complex_capsules_RealCapsuleLargeL1_seed99_latest.pt",
+    "best_checkpoint": "tmp/smoke_controls_ckpt/complex_capsules_RealCapsuleLargeL1_seed99_best.pt",
+    "best_test_acc": 0.6296875,
+    "best_epoch": 2,
+    "routing": null,
+    "phase_analysis": null,
+    "confusion_matrix": [
+      [
+        71,
+        1,
+        6,
+        6,
+        1,
+        6,
+        7,
+        7,
+        3,
+        1
+      ],
+      [
+        0,
+        145,
+        0,
+        2,
+        3,
+        4,
+        1,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        87,
+        16,
+        4,
+        4,
+        4,
+        24,
+        1,
+        2
+      ],
+      [
+        0,
+        0,
+        13,
+        94,
+        0,
+        7,
+        1,
+        12,
+        2,
+        4
+      ],
+      [
+        5,
+        5,
+        5,
+        3,
+        78,
+        3,
+        19,
+        15,
+        1,
+        12
+      ],
+      [
+        1,
+        2,
+        5,
+        17,
+        2,
+        69,
+        4,
+        9,
+        2,
+        3
+      ],
+      [
+        8,
+        4,
+        1,
+        0,
+        4,
+        10,
+        78,
+        0,
+        2,
+        2
+      ],
+      [
+        0,
+        7,
+        8,
+        19,
+        5,
+        5,
+        0,
+        82,
+        1,
+        4
+      ],
+      [
+        3,
+        1,
+        13,
+        21,
+        5,
+        10,
+        2,
+        5,
+        47,
+        11
+      ],
+      [
+        7,
+        0,
+        2,
+        16,
+        6,
+        12,
+        3,
+        13,
+        5,
+        55
+      ]
+    ]
+  },
+  "RealCapsuleControlV2": {
+    "params": 2767568,
+    "history": [
+      {
+        "epoch": 1,
+        "train_acc": 0.24348958333333334,
+        "test_acc": 0.3921875,
+        "train_loss": 2.198921322822571,
+        "test_loss": 1.9428462266921998,
+        "aux_loss": 0.0,
+        "time": 1.5719692707061768
+      },
+      {
+        "epoch": 2,
+        "train_acc": 0.5098958333333333,
+        "test_acc": 0.6125,
+        "train_loss": 1.7178994735081992,
+        "test_loss": 1.549848771095276,
+        "aux_loss": 0.0,
+        "time": 1.5073373317718506
+      }
+    ],
+    "final_train_acc": 0.5098958333333333,
+    "final_test_acc": 0.6125,
+    "final_test_loss": 1.549848771095276,
+    "total_time": 3.6904542446136475,
+    "checkpoint": "tmp/smoke_controls_ckpt/complex_capsules_RealCapsuleControlV2_seed99.pt",
+    "latest_checkpoint": "tmp/smoke_controls_ckpt/complex_capsules_RealCapsuleControlV2_seed99_latest.pt",
+    "best_checkpoint": "tmp/smoke_controls_ckpt/complex_capsules_RealCapsuleControlV2_seed99_best.pt",
+    "best_test_acc": 0.6125,
+    "best_epoch": 2,
+    "routing": null,
+    "phase_analysis": null,
+    "confusion_matrix": [
+      [
+        72,
+        3,
+        6,
+        2,
+        1,
+        6,
+        7,
+        6,
+        6,
+        0
+      ],
+      [
+        0,
+        146,
+        0,
+        1,
+        2,
+        1,
+        2,
+        3,
+        1,
+        1
+      ],
+      [
+        2,
+        8,
+        77,
+        5,
+        5,
+        2,
+        13,
+        22,
+        7,
+        3
+      ],
+      [
+        0,
+        2,
+        16,
+        71,
+        2,
+        8,
+        1,
+        19,
+        7,
+        7
+      ],
+      [
+        5,
+        8,
+        2,
+        1,
+        54,
+        0,
+        24,
+        14,
+        5,
+        33
+      ],
+      [
+        2,
+        6,
+        4,
+        12,
+        1,
+        59,
+        9,
+        9,
+        3,
+        9
+      ],
+      [
+        8,
+        5,
+        0,
+        0,
+        1,
+        2,
+        87,
+        0,
+        4,
+        2
+      ],
+      [
+        1,
+        15,
+        10,
+        7,
+        3,
+        0,
+        0,
+        81,
+        3,
+        11
+      ],
+      [
+        5,
+        2,
+        9,
+        5,
+        2,
+        3,
+        4,
+        5,
+        67,
+        16
+      ],
+      [
+        10,
+        3,
+        2,
+        2,
+        6,
+        3,
+        3,
+        6,
+        14,
+        70
+      ]
+    ]
+  },
+  "RealCapsuleControlV2Norm": {
+    "params": 2767568,
+    "history": [
+      {
+        "epoch": 1,
+        "train_acc": 0.2453125,
+        "test_acc": 0.3953125,
+        "train_loss": 2.253678258260091,
+        "test_loss": 2.140158009529114,
+        "aux_loss": 0.0,
+        "time": 1.582749366760254
+      },
+      {
+        "epoch": 2,
+        "train_acc": 0.4549479166666667,
+        "test_acc": 0.53125,
+        "train_loss": 2.0566020449002584,
+        "test_loss": 1.9836985111236571,
+        "aux_loss": 0.0,
+        "time": 1.516380786895752
+      }
+    ],
+    "final_train_acc": 0.4549479166666667,
+    "final_test_acc": 0.53125,
+    "final_test_loss": 1.9836985111236571,
+    "total_time": 3.548656702041626,
+    "checkpoint": "tmp/smoke_controls_ckpt/complex_capsules_RealCapsuleControlV2Norm_seed99.pt",
+    "latest_checkpoint": "tmp/smoke_controls_ckpt/complex_capsules_RealCapsuleControlV2Norm_seed99_latest.pt",
+    "best_checkpoint": "tmp/smoke_controls_ckpt/complex_capsules_RealCapsuleControlV2Norm_seed99_best.pt",
+    "best_test_acc": 0.53125,
+    "best_epoch": 2,
+    "routing": null,
+    "phase_analysis": null,
+    "confusion_matrix": [
+      [
+        57,
+        10,
+        6,
+        7,
+        1,
+        6,
+        7,
+        10,
+        3,
+        2
+      ],
+      [
+        0,
+        144,
+        0,
+        2,
+        0,
+        0,
+        4,
+        2,
+        0,
+        5
+      ],
+      [
+        2,
+        7,
+        65,
+        20,
+        0,
+        3,
+        12,
+        25,
+        3,
+        7
+      ],
+      [
+        1,
+        1,
+        9,
+        84,
+        0,
+        5,
+        3,
+        13,
+        1,
+        16
+      ],
+      [
+        2,
+        9,
+        0,
+        2,
+        25,
+        3,
+        47,
+        8,
+        1,
+        49
+      ],
+      [
+        2,
+        5,
+        3,
+        16,
+        0,
+        45,
+        9,
+        12,
+        2,
+        20
+      ],
+      [
+        6,
+        6,
+        1,
+        1,
+        0,
+        4,
+        84,
+        0,
+        0,
+        7
+      ],
+      [
+        0,
+        13,
+        7,
+        16,
+        0,
+        1,
+        0,
+        68,
+        1,
+        25
+      ],
+      [
+        2,
+        6,
+        9,
+        16,
+        0,
+        6,
+        7,
+        3,
+        36,
+        33
+      ],
+      [
+        5,
+        3,
+        6,
+        7,
+        0,
+        6,
+        12,
+        8,
+        0,
+        72
+      ]
+    ]
+  }
+}

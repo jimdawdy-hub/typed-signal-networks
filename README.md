@@ -6,6 +6,20 @@ The idea behind the project was to ask whether a signal could also carry identit
 
 The repository tests that idea in a controlled way. The core experiments compare learned-phase complex capsules against real-valued capsule controls, parameter-matched CNN and ViT baselines, and a stronger residual CNN baseline on synthetic affine MNIST and AffNIST. The result is nuanced: learned phase helps within the capsule family, but stronger conventional models do better overall, and the broad robustness claim does not hold up. That makes the project a diagnostic study of what learned phase can and cannot do.
 
+## arXiv Endorsement Request (cs.LG)
+
+```text
+I am seeking endorsement for arXiv category cs.LG (Machine Learning) for the following manuscript.
+
+Title: When Learned Phase Is Not Enough: A Diagnostic Evaluation of Typed Neural Signals for Affine Robustness
+Author: James Dawdy
+
+Abstract:
+Capsule networks are motivated by the idea that structured activations can represent pose more explicitly than scalar features. I test whether learned complex phase in a capsule network improves affine robustness, comparing a learned-phase complex capsule, ComplexCapsuleB, against a parameter-matched real capsule control, a parameter-matched CNN and Vision Transformer, and a stronger residual CNN. An earlier control, RealCapsuleLarge, matched the complex model’s parameter count but had two confounds: its extra parameters were functionally degenerate, and its readout had a smaller dynamic range under cross-entropy. I replace it with RealCapsuleControlV2, matched in count, width, and readout form, and isolate each confound with single-fix ablations. The confounds explain roughly half the originally reported held-out gap, but a smaller, seed-consistent effect remains on synthetic affine data. That improvement does not carry over to stronger baselines: a parameter-matched CNN beats the complex capsule on sampled affine tests, and a smaller residual CNN dominates every synthetic and AffNIST evaluation. On independent AffNIST, ComplexCapsuleB loses to the corrected control. Linear probes show that learned phase carries compact affine information, but residual CNN and ViT features encode affine factors more strongly. The result is narrow but useful: learned phase improves a capsule model relative to a carefully matched real control, yet the current architecture is not competitive with strong conventional models for affine robustness.
+
+The work is an empirical machine-learning study of neural-network representations, controlled robustness evaluation, baseline design, and negative results. The repository contains the implementation, tests, experiment logs, and manuscript source.
+```
+
 ## What’s Here
 
 - Capsule models with real and complex-valued routing
@@ -136,4 +150,3 @@ The strongest result is negative:
 - AffNIST and stronger baselines do not support a broad robustness claim
 - residual CNNs are the strongest model family in this repo’s current experiments
 
-That is the version worth writing up.
