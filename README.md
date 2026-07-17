@@ -8,8 +8,6 @@ The repository tests that idea in a controlled way. The core experiments compare
 
 ## arXiv Endorsement Request (cs.LG)
 
-The following is formatted for direct pasting into an arXiv endorsement request.
-
 ```text
 I am seeking endorsement for arXiv category cs.LG (Machine Learning) for the following manuscript.
 
@@ -151,5 +149,3 @@ The strongest result is negative:
 - synthetic affine gains exist within the capsule family
 - AffNIST and stronger baselines do not support a broad robustness claim
 - residual CNNs are the strongest model family in this repo’s current experiments
-
-That is the version worth writing up.
